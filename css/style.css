@@ -16,3 +16,46 @@ h1 {
     border-bottom: 1px solid #175dcc;
     background-color: #1d4eb4;
 }
+
+/* Generel styling for body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    align-items: center;
+    height: 50vh;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    padding-top: 20px;
+
+;
+}
+
+/* Styling for select elementerne */
+select {
+    font-size: 16px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+    width: 250px;
+    transition: border 0.3s ease;
+}
+
+/* Ændre border farve ved hover */
+select:hover {
+    border-color: #007BFF;
+}
+
+/* Styling for at sætte fokus på dropdown */
+select:focus {
+    border-color: #0056b3;
+    outline: none;
+}
+
+/* Specifik styling for de enkelte dropdowns */
+#ddTeater, #ddDato, #ddFilm, #ddGenre {
+    font-size: 16px;
+}
