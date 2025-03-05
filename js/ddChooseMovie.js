@@ -2,7 +2,6 @@ const urlMovies = "http://localhost:8080/movies";
 console.log("Jeg er i ddChooseMovie");
 
 const ddMovies = document.getElementById("ddMovies");
-
 const ddGenre = document.getElementById("ddGenre");
 
 async function fetchMovies() {
@@ -71,12 +70,53 @@ async function fetchMovieGenre(movies) {
 }
 
 // Event listener for movie selection
-function selectMovie(ev) {
+async function selectMovie(ev) {
     console.log(ev);
     const sel = ddMovies.selectedIndex;
     const selectedOption = ddMovies.options[sel];
-    const mov = selectedOption.value;
-    console.log("Valgt film ID: " + mov);
+    const movieID = selectedOption.value;
+    console.log("Valgt film ID: " + movieID);
+
+    if (movieID) {
+        await fetchMovieDetails(movieID)
+    }
+}
+
+async function fetchMovieDetails(movieID) {
+    const urlMovieDetails = `http://localhost:8080/movies/${movieID}`
+    try {
+        const response = await fetch(urlMovieDetails)
+        if (response.ok) {
+            const movie = await response.json()
+            displayMovieDetails(movie)
+        } else {
+            console.error("Failed to fetch movie details: " + response.statusText)
+        }
+    } catch (error) {
+        console.error("Error fetching movie details:", error)
+    }
+}
+
+function displayMovieDetails(movie) {
+    const movieDetailsContainer = document.getElementById("movieDetails")
+
+    movieDetailsContainer.innerHTML = ''
+
+    const movieTitle = document.createElement('h2')
+    movieTitle.textContent = movie.movieName
+    movieDetailsContainer.appendChild(movieTitle)
+
+    const movieGenre = document.createElement('p')
+    movieGenre.textContent = movie.genre
+    movieDetailsContainer.appendChild(movieGenre)
+
+    const movieAgeLimit = document.createElement('p')
+    movieAgeLimit.textContent = "Age: " + movie.ageLimit
+    movieDetailsContainer.appendChild(movieAgeLimit)
+
+    const movieDuration = document.createElement('p')
+    movieDuration.textContent = movie.duration + "m"
+    movieDetailsContainer.appendChild(movieDuration)
 }
 
 // Event listener for movie genre selection
