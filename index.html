@@ -7,14 +7,13 @@
     <title>CineNova</title>
 </head>
 <header>
-    <!-- skal lave et logo -->
     <h1 class="title">CineNova</h1>
 
 
 </header>
 <body>
-<div>
 
+<div class="dropdown-container">
 <select id="ddTeater">
     <option value="">Vælg sal</option>
 </select>
@@ -29,10 +28,19 @@
 <select id="ddGenre">
     <option value="">Vælg genre</option>
 </select>
-
 </div>
 
-<div id="movieDetails"></div>
+<div id="movieDetails">
+    <h2 id="movieName"></h2>
+    <div class="movie-info">
+        <p id="movieGenre"></p>
+        <p id="movieAgeLimit"></p>
+        <p id="movieDuration"></p>
+    </div>
+    <div class="image-container">
+    <img id="movieImage" alt="Movie Image"/>
+    </div>
+</div>
 
 </body>
 
