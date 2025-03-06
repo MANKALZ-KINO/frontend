@@ -1,14 +1,12 @@
-
-
 /* ELEMENTS STYLE */
 h1 {
     font-size: 4rem;
     text-align: center;
     position: absolute;
     width: 100%;
-    top: 0%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-family: Dubai;
 }
 
 .title {
@@ -22,17 +20,24 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     background-color: #f4f4f4;
-    align-items: center;
-    height: 50vh;
     display: flex;
-    flex-direction: row;
+    flex-direction: column; /* Stacks elements vertically */
+    align-items: center;
     gap: 15px;
     padding-top: 20px;
-
-;
 }
 
-/* Styling for select elementerne */
+/* Dropdown container to keep the dropdowns horizontally */
+.dropdown-container {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between; /* Evenly space the dropdowns */
+    gap: 15px;
+    width: 100%; /* Ensure it stretches across */
+    max-width: 1200px; /* Optional: set a max-width for better control */
+}
+
+/* Styling for select elements */
 select {
     font-size: 16px;
     padding: 10px;
@@ -59,5 +64,45 @@ select:focus {
 #ddTeater, #ddDato, #ddFilm, #ddGenre {
     font-size: 16px;
 }
+
+/* Styling for #movieDetails */
+#movieDetails {
+    width: 100%;
+    max-width: 1200px; /* Optional: same max-width for consistency */
+}
+
+#movieDetails h2 {
+    text-align: left; /* Centers the text */
+    font-size: 2rem; /* Adjusts font size */
+    color: #175dcc; /* Text color */
+}
+
+#movieDetails .movie-info {
+    display: flex;
+    flex-direction: row; /* Align paragraphs horizontally (in a row) */
+    gap: 20px;
+    text-align: left;
+}
+
+#movieDetails p {
+    border: 2px solid black; /* Add a 2px solid black border */
+    padding: 10px; /* Optional: Add some padding inside the border */
+    font-size: 1.1rem; /* Adjust font size */
+    color: black; /* Color for the text */
+    border-radius: 10px;
+}
+
+.image-container {
+    text-align: center;  /* Centers the image horizontally */
+}
+
+#movieDetails img {
+    width: 500px; /* Set the width to 200px */
+    height: auto; /* Keep the aspect ratio intact */
+}
+
+
+
+
 
 

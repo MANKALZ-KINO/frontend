@@ -98,26 +98,24 @@ async function fetchMovieDetails(movieID) {
 }
 
 function displayMovieDetails(movie) {
-    const movieDetailsContainer = document.getElementById("movieDetails")
+    // Get the existing elements by their ID
+    const movieNameElement = document.getElementById("movieName");
+    const movieGenreElement = document.getElementById("movieGenre");
+    const movieAgeLimitElement = document.getElementById("movieAgeLimit");
+    const movieDurationElement = document.getElementById("movieDuration");
+    const movieImageElement = document.getElementById("movieImage");
 
-    movieDetailsContainer.innerHTML = ''
-
-    const movieTitle = document.createElement('h2')
-    movieTitle.textContent = movie.movieName
-    movieDetailsContainer.appendChild(movieTitle)
-
-    const movieGenre = document.createElement('p')
-    movieGenre.textContent = movie.genre
-    movieDetailsContainer.appendChild(movieGenre)
-
-    const movieAgeLimit = document.createElement('p')
-    movieAgeLimit.textContent = "Age: " + movie.ageLimit
-    movieDetailsContainer.appendChild(movieAgeLimit)
-
-    const movieDuration = document.createElement('p')
-    movieDuration.textContent = movie.duration + "m"
-    movieDetailsContainer.appendChild(movieDuration)
+    // Set the values from the movie object
+    movieNameElement.textContent = movie.movieName;
+    movieGenreElement.textContent = movie.genre;
+    movieAgeLimitElement.textContent = movie.ageLimit + "+";
+    movieDurationElement.textContent = movie.duration + " m";
+    movieImageElement.src = movie.imageUrl;  // Set the image URL
+    console.log("Image URL: ", movie.imageUrl);
 }
+
+
+
 
 // Event listener for movie genre selection
 function selectGenre(ev) {
