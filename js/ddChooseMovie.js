@@ -37,6 +37,7 @@ async function fetchMovies() {
         console.error("Error fetching movies:", error);
     }
 }
+
 async function fetchMovieGenre(movies) {
     try {
         // Create a Set to ensure unique genres
@@ -118,30 +119,51 @@ function displayMovieDetails(movie) {
     movieDuration.textContent = movie.duration + "m"
     movieDetailsContainer.appendChild(movieDuration)
 
+    const moviePlanButton = document.createElement('button');
+    moviePlanButton.textContent = 'See Movie Plan';
+    movieDetailsContainer.appendChild(moviePlanButton);
+
     const movieImage = document.createElement("img")
     movieImage.src = movie.imageUrl
     movieDetailsContainer.appendChild(movieImage)
+
+    console.log("Movie ID for fetching plans:", movie.movieId);
+
+    moviePlanButton.addEventListener("click", () => fetchMoviePlan(movie.movieId));
 }
 
-/*
-function displayMovieDetails(movie) {
-    // Get the existing elements by their ID
-    const movieNameElement = document.getElementById("movieName");
-    const movieGenreElement = document.getElementById("movieGenre");
-    const movieAgeLimitElement = document.getElementById("movieAgeLimit");
-    const movieDurationElement = document.getElementById("movieDuration");
-    const movieImageElement = document.getElementById("movieImage");
-
-    // Set the values from the movie object
-    movieNameElement.textContent = movie.movieName;
-    movieGenreElement.textContent = movie.genre;
-    movieAgeLimitElement.textContent = movie.ageLimit + "+";
-    movieDurationElement.textContent = movie.duration + " m";
-    movieImageElement.src = movie.imageUrl;  // Set the image URL
-    console.log("Image URL: ", movie.imageUrl);
+async function fetchMoviePlan(movieID) {
+    const urlMoviePlan = `http://localhost:8080/movieplans/${movieID}`;
+    try {
+        const response = await fetch(urlMoviePlan);
+        if (response.ok) {
+            const moviePlans = await response.json();
+            console.log("Movie plans received:", moviePlans);
+            displayMoviePlans(moviePlans); //
+        } else {
+            console.error("Failed to fetch movie plan: " + response.statusText);
+        }
+    } catch (error) {
+        console.error("Error fetching movie plan:", error);
+    }
 }
 
- */
+
+function displayMoviePlans(moviePlans) {
+    const moviePlanContainer = document.getElementById("moviePlan");
+
+    moviePlanContainer.innerHTML = '';
+
+    moviePlans.forEach(plan => {
+        const moviePlanDate = document.createElement('h3');
+        moviePlanDate.textContent = "Show date: " + plan.date
+        moviePlanContainer.appendChild(moviePlanDate)
+
+        const showTime = document.createElement('p');
+        showTime.textContent = "Show time: " + plan.showNumber
+        moviePlanContainer.appendChild(showTime);
+    });
+}
 
 // Event listener for movie genre selection
 function selectGenre(ev) {
