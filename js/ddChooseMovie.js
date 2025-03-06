@@ -98,6 +98,33 @@ async function fetchMovieDetails(movieID) {
 }
 
 function displayMovieDetails(movie) {
+    const movieDetailsContainer = document.getElementById("movieDetails")
+
+    movieDetailsContainer.innerHTML = ''
+
+    const movieTitle = document.createElement('h2')
+    movieTitle.textContent = movie.movieName
+    movieDetailsContainer.appendChild(movieTitle)
+
+    const movieGenre = document.createElement('p')
+    movieGenre.textContent = movie.genre
+    movieDetailsContainer.appendChild(movieGenre)
+
+    const movieAgeLimit = document.createElement('p')
+    movieAgeLimit.textContent = movie.ageLimit
+    movieDetailsContainer.appendChild(movieAgeLimit)
+
+    const movieDuration = document.createElement('p')
+    movieDuration.textContent = movie.duration + "m"
+    movieDetailsContainer.appendChild(movieDuration)
+
+    const movieImage = document.createElement("img")
+    movieImage.src = movie.imageUrl
+    movieDetailsContainer.appendChild(movieImage)
+}
+
+/*
+function displayMovieDetails(movie) {
     // Get the existing elements by their ID
     const movieNameElement = document.getElementById("movieName");
     const movieGenreElement = document.getElementById("movieGenre");
@@ -114,8 +141,7 @@ function displayMovieDetails(movie) {
     console.log("Image URL: ", movie.imageUrl);
 }
 
-
-
+ */
 
 // Event listener for movie genre selection
 function selectGenre(ev) {
