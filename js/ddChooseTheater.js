@@ -1,5 +1,5 @@
 const urlTheaters = "http://localhost:8080/theater/all";
-console.log("Jeg er i ddChooseMovie");
+console.log("Jeg er i ddChooseTheater");
 
 const ddTheater = document.getElementById("ddTeater");
 
