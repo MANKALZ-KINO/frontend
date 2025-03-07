@@ -6,7 +6,7 @@ h1 {
     width: 100%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-family: Dubai;
+    font-family: 'Basier Square', sans-serif;
 }
 
 .title {
@@ -35,6 +35,7 @@ body {
     gap: 15px;
     width: 100%; /* Ensure it stretches across */
     max-width: 1200px; /* Optional: set a max-width for better control */
+    font-family: 'Basier Square', sans-serif;
 }
 
 /* Styling for select elements */
@@ -69,12 +70,14 @@ select:focus {
 #movieDetails {
     width: 100%;
     max-width: 1200px; /* Optional: same max-width for consistency */
+    position: relative;
 }
 
 #movieDetails h2 {
     text-align: left; /* Centers the text */
     font-size: 2rem; /* Adjusts font size */
     color: #175dcc; /* Text color */
+    font-family: 'Basier Square', sans-serif;
 }
 
 #movieDetails .movie-info {
@@ -92,10 +95,30 @@ select:focus {
     border-radius: 10px;
     display: inline-flex;
     margin: 5px;
+    font-family: 'Basier Square', sans-serif;
+}
+
+#movieDetails button {
+    background-color: #175dcc; /* Green background */
+    color: black; /* White text */
+    font-size: 16px; /* Font size */
+    padding: 15px 30px; /* Padding */
+    border: none; /* Remove borders */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition */
+    font-family: 'Basier Square', sans-serif;
+    position: absolute;
+    right: 20px;
+    top: 60px;
+}
+
+#movieDetails button:hover {
+    background-color: dodgerblue;
 }
 
 #movieDetails img {
-    margin: 0 auto;
+    margin: 40px auto;
     display: block;
     text-align: center;
     width: 500px; /* Set the width to 200px */
