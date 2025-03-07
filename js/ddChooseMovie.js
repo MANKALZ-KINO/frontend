@@ -112,11 +112,11 @@ function displayMovieDetails(movie) {
     movieDetailsContainer.appendChild(movieGenre)
 
     const movieAgeLimit = document.createElement('p')
-    movieAgeLimit.textContent = movie.ageLimit
+    movieAgeLimit.textContent ="pg"+movie.ageLimit
     movieDetailsContainer.appendChild(movieAgeLimit)
 
     const movieDuration = document.createElement('p')
-    movieDuration.textContent = movie.duration + "m"
+    movieDuration.textContent = movie.duration + " minutes"
     movieDetailsContainer.appendChild(movieDuration)
 
     const moviePlanButton = document.createElement('button');
