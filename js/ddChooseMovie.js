@@ -68,6 +68,22 @@ async function fetchMovieGenre(movies) {
     }
 }
 
+async function fetchMoviePlan(movieID) {
+    const urlMoviePlan = `http://localhost:8080/movieplans/${movieID}`;
+    try {
+        const response = await fetch(urlMoviePlan);
+        if (response.ok) {
+            const moviePlans = await response.json();
+            console.log("Movie plans received:", moviePlans);
+            displayMoviePlans(moviePlans); //
+        } else {
+            console.error("Failed to fetch movie plan: " + response.statusText);
+        }
+    } catch (error) {
+        console.error("Error fetching movie plan:", error);
+    }
+}
+
 // Event listener for movie selection
 async function selectMovie(ev) {
     console.log(ev);
@@ -133,24 +149,34 @@ function displayMovieDetails(movie) {
 
     console.log("Movie ID for fetching plans:", movie.movieId);
 
+    // Back to All Movies button
+    const backButton = document.createElement('button');
+    backButton.textContent = 'Back to All Movies';
+    movieDetailsContainer.appendChild(backButton);
+
+    // Add an event listener for the back button
+    backButton.addEventListener("click", () => {
+        // Clear movie details section
+        movieDetailsContainer.innerHTML = '';
+        // Clear the movie plans container (if it's displayed)
+        const moviePlanContainer = document.getElementById("moviePlan");
+        moviePlanContainer.innerHTML = '';
+
+
+        // Re-fetch and display the movies again (or you can show them directly if you already have them in memory)
+        fetchMovies(); // Assuming fetchMovies fetches all movies and displays them on the front page
+    });
+
+    // Event listener for the "See Movie Plan" button
+    moviePlanButton.addEventListener("click", () => {
+
+        fetchMoviePlan(movie.movieId);
+    });
+
+
     moviePlanButton.addEventListener("click", () => fetchMoviePlan(movie.movieId));
 }
 
-async function fetchMoviePlan(movieID) {
-    const urlMoviePlan = `http://localhost:8080/movieplans/${movieID}`;
-    try {
-        const response = await fetch(urlMoviePlan);
-        if (response.ok) {
-            const moviePlans = await response.json();
-            console.log("Movie plans received:", moviePlans);
-            displayMoviePlans(moviePlans); //
-        } else {
-            console.error("Failed to fetch movie plan: " + response.statusText);
-        }
-    } catch (error) {
-        console.error("Error fetching movie plan:", error);
-    }
-}
 
 
 function displayMoviePlans(moviePlans) {
