@@ -3,6 +3,41 @@ console.log("Jeg er i ddChooseMovie");
 
 const ddMovies = document.getElementById("ddMovies");
 const ddGenre = document.getElementById("ddGenre");
+const testBody = document.getElementById("body-container");
+
+// function renderBody() {
+//     if (isUserAuthenticated(auth)) {
+//         testBody.innerHTML = `
+//             <select id="ddTeater">
+//                 <option value="">Vælg sal</option>
+//             </select>
+//
+//             <select id="ddDato">
+//                 <option value="">Vælg dato</option>
+//             </select>
+//             <select id="ddMovies">
+//                 <option value="">Vælg film</option>
+//             </select>
+//
+//             <select id="ddGenre">
+//                 <option value="">Vælg genre</option>
+//             </select>
+//         `
+//         return;
+//     }
+//
+//
+//     testBody.innerHTML = `
+//         Opdater siden :)
+//     `
+// }
+
+function isUserAuthenticated() {
+    // TODO: REMOVE THIS
+    localStorage.setItem("auth", 'bruger')
+    const auth = localStorage.getItem("auth");
+    return auth === "bruger";
+}
 
 async function fetchMovies() {
     try {
@@ -22,6 +57,7 @@ async function fetchMovies() {
                 option.value = movie.movieId;
                 ddMovies.appendChild(option);
             });
+            await fetchMovieGenre(movies);
 
             // Call fetchMovieGenre with the fetched movies to populate the genre dropdown
             fetchMovieGenre(movies);
@@ -31,6 +67,7 @@ async function fetchMovies() {
         } else {
             console.error("Failed to fetch movies: " + response.statusText);
         }
+
     } catch (error) {
         console.error("Error fetching movies:", error);
     }
@@ -204,12 +241,34 @@ function displayMovieDetails(movie) {
     moviePlanButton.addEventListener("click", () => fetchMoviePlan(movie.movieId));
 }
 
+async function fetchMoviePlan(movieID) {
+    const urlMoviePlan = `http://localhost:8080/movieplans/${movieID}`;
+    try {
+        const response = await fetch(urlMoviePlan);
+        if (response.ok) {
+            const moviePlans = await response.json();
+            console.log("Movie plans received:", moviePlans);
+            displayMoviePlans(moviePlans, movieID); //
+        } else {
+            console.error("Failed to fetch movie plan: " + response.statusText);
+        }
+    } catch (error) {
+        console.error("Error fetching movie plan:", error);
+    }
+}
 
 
-function displayMoviePlans(moviePlans) {
+function displayMoviePlans(moviePlans, movieId) {
     const moviePlanContainer = document.getElementById("moviePlan");
 
     moviePlanContainer.innerHTML = '';
+
+    if (isUserAuthenticated()) {
+        const moviePlanCreateButton = document.createElement("button");
+        moviePlanCreateButton.textContent = 'Add movie plan';
+        document.getElementById('moviePlan').appendChild(moviePlanCreateButton);
+        moviePlanCreateButton.addEventListener("click", () => openModal('create-movie-plan-modal'));
+    }
 
     moviePlans.forEach(plan => {
         const moviePlanDate = document.createElement('h3');
@@ -222,35 +281,84 @@ function displayMoviePlans(moviePlans) {
     });
 }
 
-// Event listener for genre selection
-async function selectGenre(ev) {
-    console.log(ev);
-    const sel = ddGenre.selectedIndex;
-    const selectedOption = ddGenre.options[sel];
-    const selectedGenre = selectedOption.value;
-    console.log("Valgt genre: " + selectedGenre);
+// open modal by id
+function openModal(id) {
+    document.getElementById(id).classList.add('open');
+    document.body.classList.add('jw-modal-open');
+}
 
-    if (selectedGenre) {
-        // Fetch movies and filter them by genre
-        const response = await fetch(urlMovies);
-        if (response.ok) {
-            const movies = await response.json();
-            const filteredMovies = movies.filter(movie => movie.genre === selectedGenre);
-            displayMovies(filteredMovies); // Show filtered movies
-        } else {
-            console.error("Failed to fetch movies: " + response.statusText);
-        }
-    } else {
-        // If no genre is selected, show all movies
-        fetchMovies();
+// close currently open modal
+function closeModal() {
+    document.querySelector('.jw-modal.open').classList.remove('open');
+    document.body.classList.remove('jw-modal-open');
+}
+
+async function saveMoviePlan() {
+    const date = document.getElementById('new-movie-plan-date').value
+    const theater = document.getElementById('new-movie-plan-theater').value
+    const showtime = document.getElementById('new-movie-plan-showing').value
+
+    const dto = {
+        date,
+        theater,
+        showtime
+    }
+
+    const urlMoviePlan = `http://localhost:8080/movieplans`;
+    try {
+        const response = await fetch(urlMoviePlan, {
+            method: 'POST',
+            body: JSON.stringify(dto),
+
+        });
+    } catch (error) {
+        console.error("Error creating movie plan:", error);
     }
 }
 
+window.addEventListener('load', function() {
+    // close modals on background click
+    document.addEventListener('click', event => {
+        if (event.target.classList.contains('jw-modal')) {
+            closeModal();
+        }
+    });
+});
+
+// Event listener for movie genre selection
+function selectGenre(ev) {
+// Event listener for genre selection
+    async function selectGenre(ev) {
+        console.log(ev);
+        const sel = ddGenre.selectedIndex;
+        const selectedOption = ddGenre.options[sel];
+        const selectedGenre = selectedOption.value;
+        console.log("Valgt genre: " + selectedGenre);
+
+        if (selectedGenre) {
+            // Fetch movies and filter them by genre
+            const response = await fetch(urlMovies);
+            if (response.ok) {
+                const movies = await response.json();
+                const filteredMovies = movies.filter(movie => movie.genre === selectedGenre);
+                displayMovies(filteredMovies); // Show filtered movies
+            } else {
+                console.error("Failed to fetch movies: " + response.statusText);
+            }
+        } else {
+            // If no genre is selected, show all movies
+            fetchMovies();
+        }
+    }
+
 // Kald fetchMovies når DOM er klar
-document.addEventListener("DOMContentLoaded", fetchMovies);
-document.addEventListener("DOMContentLoaded", fetchMovieGenre);
+// document.addEventListener("DOMContentLoaded", renderBody);
+    document.addEventListener("DOMContentLoaded", fetchMovies);
+    document.addEventListener("DOMContentLoaded", fetchMovieGenre);
 // Event listener for ændringer i dropdown
-ddMovies.addEventListener('change', selectMovie);
-ddGenre.addEventListener('change', selectGenre);
+    ddMovies.addEventListener('change', selectMovie);
+    ddGenre.addEventListener('change', selectGenre);
+}
+
 
 
