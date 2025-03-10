@@ -130,14 +130,17 @@ async function selectMovie(ev) {
     console.log("Valgt film ID: " + movieID);
 
     if (movieID) {
-        // Fetch the selected movie details
+        // ✅ Clear the full movie list BEFORE showing the selected movie
+        const movieListContainer = document.getElementById("frontPage");
+        if (movieListContainer) {
+            movieListContainer.innerHTML = "";
+        }
+
+        // ✅ Fetch and display only the selected movie
         await fetchMovieDetails(movieID);
-    } else {
-        // If no movie is selected, clear the movie details container
-        const movieDetailsContainer = document.getElementById("movieDetails");
-        movieDetailsContainer.innerHTML = ''; // Clear any displayed movie details
     }
 }
+
 
 async function fetchMovieDetails(movieID) {
     const urlMovieDetails = `http://localhost:8080/movies/${movieID}`
@@ -156,40 +159,64 @@ async function fetchMovieDetails(movieID) {
 
 //Mangler så at når man clicker på et billede med movie så skal den også opdatere de andre søge kriterier såsom Select movie og genre
 function displayMovieDetails(movie) {
-    const movieDetailsContainer = document.getElementById("movieDetails")
+    const movieDetailsContainer = document.getElementById("movieDetails");
 
-    movieDetailsContainer.innerHTML = ''
+    // Clear previous content
+    movieDetailsContainer.innerHTML = '';
 
-    const movieTitle = document.createElement('h2')
-    movieTitle.textContent = movie.movieName
-    movieDetailsContainer.appendChild(movieTitle)
+    // Movie title
+    const movieTitle = document.createElement('h2');
+    movieTitle.textContent = movie.movieName;
+    movieDetailsContainer.appendChild(movieTitle);
 
-    const movieGenre = document.createElement('p')
-    movieGenre.textContent = movie.genre
-    movieDetailsContainer.appendChild(movieGenre)
+    // Movie genre
+    const movieGenre = document.createElement('p');
+    movieGenre.textContent = movie.genre;
+    movieDetailsContainer.appendChild(movieGenre);
 
-    const movieAgeLimit = document.createElement('p')
-    movieAgeLimit.textContent ="pg"+movie.ageLimit
-    movieDetailsContainer.appendChild(movieAgeLimit)
+    // Movie age limit
+    const movieAgeLimit = document.createElement('p');
+    movieAgeLimit.textContent = "PG " + movie.ageLimit;
+    movieDetailsContainer.appendChild(movieAgeLimit);
 
-    const movieDuration = document.createElement('p')
-    movieDuration.textContent = movie.duration + " minutes"
-    movieDetailsContainer.appendChild(movieDuration)
+    // Movie duration
+    const movieDuration = document.createElement('p');
+    movieDuration.textContent = movie.duration + " minutes";
+    movieDetailsContainer.appendChild(movieDuration);
 
-    const moviePlanButton = document.createElement('button');
-    moviePlanButton.textContent = 'See Movie Plan';
+    // Movie image
+    const movieImage = document.createElement("img");
+    movieImage.src = movie.imageUrl;
+    movieDetailsContainer.appendChild(movieImage);
+
+    // Movie Plan Button
+    const moviePlanButton = document.createElement("button");
+    moviePlanButton.textContent = "See Movie Plan";
+    moviePlanButton.id = "moviePlanButton";  // Add an ID
     movieDetailsContainer.appendChild(moviePlanButton);
 
-    const movieImage = document.createElement("img")
-    movieImage.src = movie.imageUrl
-    movieDetailsContainer.appendChild(movieImage)
+    // Add event listener for "See Movie Plan" button
+    moviePlanButton.addEventListener("click", function () {
+        fetchMoviePlan(movie.movieId);
+    });
 
     console.log("Movie ID for fetching plans:", movie.movieId);
 
-    // Back to All Movies button
-    const backButton = document.createElement('button');
-    backButton.textContent = 'Back to All Movies';
-    movieDetailsContainer.appendChild(backButton);
+// Add click event to return to the homepage
+    backLogo.addEventListener("click", () => {
+        // Clear the movie details section
+        movieDetailsContainer.innerHTML = '';
+
+        // Clear the movie plans container
+        const moviePlanContainer = document.getElementById("moviePlan");
+        moviePlanContainer.innerHTML = '';
+
+        // Re-fetch and display all movies
+        fetchMovies();
+    });
+
+
+
 
     // Add an event listener for the back button
     backButton.addEventListener("click", () => {

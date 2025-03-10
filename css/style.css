@@ -4,9 +4,18 @@ h1 {
     text-align: center;
     position: absolute;
     width: 100%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: 'Basier Square', sans-serif;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Optional, to ensure it stays above other elements */
+}
+/* Logo styling */
+.logo {
+    width: 150px; /* Adjust size as needed */
+    height: auto;
+    cursor: pointer;
+
 }
 
 .title {
