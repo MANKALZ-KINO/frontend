@@ -106,7 +106,7 @@ select:focus {
 }
 
 #movieDetails button {
-    background-color: #175dcc; /* Green background */
+    background-color: #175dcc; /* blue background */
     color: black; /* White text */
     font-size: 16px; /* Font size */
     padding: 15px 30px; /* Padding */
@@ -118,6 +118,24 @@ select:focus {
     position: absolute;
     right: 20px;
     top: 60px;
+}
+#movieDetails button:nth-child(2) {
+    top: 50px; /* Adjust this value to position the second button */
+}
+#movieDetails button:last-child {
+    top: 60px; /* Position the "Back to All Movies" button */
+    left: 50%;
+    max-width: 200px; /* Limit the button width */
+    transform: translateX(-50%);
+    z-index: 1000; /* Ensure it stays above other content */
+}
+
+/* Position adjustments for movie plans button */
+#movieDetails button:first-child {
+    top: 100px; /* Adjust top to your preference */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000; /* Ensure it stays above the content */
 }
 
 #movieDetails button:hover {
@@ -158,6 +176,7 @@ select:focus {
 .image-container img:hover {
     opacity: 0.8;
 }
+
 
 
 
