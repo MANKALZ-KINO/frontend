@@ -231,6 +231,7 @@ async function fetchMoviePlan(movieID) {
 }
 
 
+
 function displayMoviePlans(moviePlans, movieId) {
     const moviePlanContainer = document.getElementById("moviePlan");
 
