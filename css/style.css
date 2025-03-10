@@ -1,0 +1,186 @@
+header {
+    background-color: rgba(255, 255, 255, 0.61); /* Blue background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Optional, to ensure it stays above other elements */
+}
+/* Logo styling */
+.logo {
+    width: 150px; /* Adjust size as needed */
+    height: auto;
+}
+
+.title {
+    padding: 8px 20px;
+    border-bottom: 1px solid #175dcc;
+    background-color: #1d4eb4;
+}
+
+/* Generel styling for body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #ffffff; /* Blue background */
+    display: flex;
+    flex-direction: column; /* Stacks elements vertically */
+    align-items: center;
+    gap: 15px;
+    padding-top: 20px;
+}
+
+/* Dropdown container to keep the dropdowns horizontally */
+.dropdown-container {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between; /* Evenly space the dropdowns */
+    gap: 15px;
+    width: 100%; /* Ensure it stretches across */
+    max-width: 1200px; /* Optional: set a max-width for better control */
+    font-family: 'Basier Square', sans-serif;
+}
+
+/* Styling for select elements */
+select {
+    font-size: 16px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+    width: 250px;
+    transition: border 0.3s ease;
+}
+
+/* Ændre border farve ved hover */
+select:hover {
+    border-color: #007BFF;
+}
+
+/* Styling for at sætte fokus på dropdown */
+select:focus {
+    border-color: #0056b3;
+    outline: none;
+}
+
+/* Specifik styling for de enkelte dropdowns */
+#ddTeater, #ddDato, #ddFilm, #ddGenre {
+    font-size: 16px;
+}
+
+/* Styling for #movieDetails */
+#movieDetails {
+    width: 100%;
+    max-width: 1200px; /* Optional: same max-width for consistency */
+    position: relative;
+}
+
+#movieDetails h2 {
+    text-align: left; /* Centers the text */
+    font-size: 2rem; /* Adjusts font size */
+    color: #175dcc; /* Text color */
+    font-family: 'Basier Square', sans-serif;
+}
+
+#movieDetails .movie-info {
+    display: flex;
+    flex-direction: row; /* Align paragraphs horizontally (in a row) */
+    gap: 10px;
+    text-align: left;
+}
+
+#movieDetails p {
+    border: 2px solid black; /* Add a 2px solid black border */
+    padding: 10px; /* Optional: Add some padding inside the border */
+    font-size: 1.1rem; /* Adjust font size */
+    color: black; /* Color for the text */
+    border-radius: 10px;
+    display: inline-flex;
+    margin: 5px;
+    font-family: 'Basier Square', sans-serif;
+}
+
+#movieDetails button {
+    background-color: #175dcc; /* blue background */
+    color: black; /* White text */
+    font-size: 16px; /* Font size */
+    padding: 15px 30px; /* Padding */
+    border: none; /* Remove borders */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition */
+    font-family: 'Basier Square', sans-serif;
+    position: absolute;
+    right: 20px;
+    top: 60px;
+}
+#movieDetails button:nth-child(2) {
+    top: 50px; /* Adjust this value to position the second button */
+}
+#movieDetails button:last-child {
+    top: 60px; /* Position the "Back to All Movies" button */
+    left: 50%;
+    max-width: 200px; /* Limit the button width */
+    transform: translateX(-50%);
+    z-index: 1000; /* Ensure it stays above other content */
+}
+
+/* Position adjustments for movie plans button */
+#movieDetails button:first-child {
+    top: 100px; /* Adjust top to your preference */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000; /* Ensure it stays above the content */
+}
+
+#movieDetails button:hover {
+    background-color: dodgerblue;
+}
+
+#movieDetails img {
+    margin: 40px auto;
+    display: block;
+    text-align: center;
+    width: 500px; /* Set the width to 200px */
+    height: auto; /* Keep the aspect ratio intact */
+}
+
+#frontPage {
+
+    display: flex; /* Align movie containers in a row */
+    flex-direction: row;
+    gap: 20px; /* Add spacing between each movie */
+}
+
+#frontPage. {
+    display: flex;
+    flex-direction: column; /* Stack image and title */
+    align-items: center; /* Center content */
+    text-align: center;
+}
+
+.image-container img {
+    width: 350px;
+    height: auto;
+}
+
+.image-container h3 {
+    margin-top: 10px;
+}
+
+.image-container img:hover {
+    opacity: 0.8;
+}
+
+
+
+
+
+
+
+
