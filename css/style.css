@@ -1,12 +1,19 @@
-/* ELEMENTS STYLE */
-h1 {
-    font-size: 4rem;
-    text-align: center;
-    position: absolute;
+header {
+    background-color: rgba(255, 255, 255, 0.61); /* Blue background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
     width: 100%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: 'Basier Square', sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Optional, to ensure it stays above other elements */
+}
+/* Logo styling */
+.logo {
+    width: 150px; /* Adjust size as needed */
+    height: auto;
 }
 
 .title {
@@ -19,7 +26,7 @@ h1 {
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background-color: #f4f4f4;
+    background-color: #ffffff; /* Blue background */
     display: flex;
     flex-direction: column; /* Stacks elements vertically */
     align-items: center;
@@ -126,6 +133,7 @@ select:focus {
 }
 
 #frontPage {
+
     display: flex; /* Align movie containers in a row */
     flex-direction: row;
     gap: 20px; /* Add spacing between each movie */

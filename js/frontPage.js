@@ -19,27 +19,39 @@ async function fetchMovies() {
 }
 
 async function displayMovies(movies) {
-    const frontPageContainer = document.getElementById("frontPage")
+    const frontPageContainer = document.getElementById("frontPage");
 
-    frontPageContainer.innerHTML = ''
+    // Clear the front page container before adding new movies
+    frontPageContainer.innerHTML = '';
 
+    // If there are no movies, show a message
+    if (movies.length === 0) {
+        const noMoviesMessage = document.createElement('p');
+        noMoviesMessage.textContent = "Ingen film fundet for denne genre.";
+        frontPageContainer.appendChild(noMoviesMessage);
+        return;
+    }
+
+    // Loop through the movies and create elements
     movies.forEach(movie => {
-
-        const movieContainer = document.createElement("div")
+        const movieContainer = document.createElement("div");
         movieContainer.classList.add("image-container");
 
-        const movieImage = document.createElement("img")
-        movieImage.src = movie.imageUrl
-        movieContainer.appendChild(movieImage)
+        const movieImage = document.createElement("img");
+        movieImage.src = movie.imageUrl;
+        movieContainer.appendChild(movieImage);
 
-        movieImage.addEventListener("click", () => {frontPageContainer.innerHTML = ''; fetchMovieDetails(movie.movieId)});
+        movieImage.addEventListener("click", () => {
+            frontPageContainer.innerHTML = '';
+            fetchMovieDetails(movie.movieId);
+        });
 
-        const movieName = document.createElement("h3")
-        movieName.textContent = movie.movieName
-        movieContainer.appendChild(movieName)
+        const movieName = document.createElement("h3");
+        movieName.textContent = movie.movieName;
+        movieContainer.appendChild(movieName);
 
-        frontPageContainer.appendChild(movieContainer)
-    })
+        frontPageContainer.appendChild(movieContainer);
+    });
 }
 
 document.addEventListener("DOMContentLoaded", fetchMovies);

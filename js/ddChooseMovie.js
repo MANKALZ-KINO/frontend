@@ -8,32 +8,30 @@ async function fetchMovies() {
     try {
         const response = await fetch(urlMovies);
 
-        // Tjek om responsen er OK
         if (response.ok) {
             const movies = await response.json();
 
-            // Hvis listen er tom, log en besked
             if (movies.length === 0) {
                 console.log("Ingen film fundet.");
             }
 
-            // Fjern tidligere elementer fra dropdown
             ddMovies.innerHTML = "<option value=''>Vælg en film</option>";
-
-            // Tilføj de nye film til dropdown
             movies.forEach(movie => {
                 const option = document.createElement("option");
                 option.textContent = movie.movieName;
                 option.value = movie.movieId;
                 ddMovies.appendChild(option);
             });
+
+            // Call fetchMovieGenre with the fetched movies to populate the genre dropdown
             fetchMovieGenre(movies);
+
+            // Display all movies initially
+            displayMovies(movies);
         } else {
-            // Hvis responsen ikke er OK, log fejl
             console.error("Failed to fetch movies: " + response.statusText);
         }
     } catch (error) {
-        // Log fejl ved fetch
         console.error("Error fetching movies:", error);
     }
 }
@@ -79,7 +77,12 @@ async function selectMovie(ev) {
     console.log("Valgt film ID: " + movieID);
 
     if (movieID) {
-        await fetchMovieDetails(movieID)
+        // Fetch the selected movie details
+        await fetchMovieDetails(movieID);
+    } else {
+        // If no movie is selected, clear the movie details container
+        const movieDetailsContainer = document.getElementById("movieDetails");
+        movieDetailsContainer.innerHTML = ''; // Clear any displayed movie details
     }
 }
 
@@ -98,6 +101,7 @@ async function fetchMovieDetails(movieID) {
     }
 }
 
+//Mangler så at når man clicker på et billede med movie så skal den også opdatere de andre søge kriterier såsom Select movie og genre
 function displayMovieDetails(movie) {
     const movieDetailsContainer = document.getElementById("movieDetails")
 
@@ -165,13 +169,28 @@ function displayMoviePlans(moviePlans) {
     });
 }
 
-// Event listener for movie genre selection
-function selectGenre(ev) {
+// Event listener for genre selection
+async function selectGenre(ev) {
     console.log(ev);
     const sel = ddGenre.selectedIndex;
     const selectedOption = ddGenre.options[sel];
-    const genre = selectedOption.value;
-    console.log("Valgt genre: " + genre);
+    const selectedGenre = selectedOption.value;
+    console.log("Valgt genre: " + selectedGenre);
+
+    if (selectedGenre) {
+        // Fetch movies and filter them by genre
+        const response = await fetch(urlMovies);
+        if (response.ok) {
+            const movies = await response.json();
+            const filteredMovies = movies.filter(movie => movie.genre === selectedGenre);
+            displayMovies(filteredMovies); // Show filtered movies
+        } else {
+            console.error("Failed to fetch movies: " + response.statusText);
+        }
+    } else {
+        // If no genre is selected, show all movies
+        fetchMovies();
+    }
 }
 
 // Kald fetchMovies når DOM er klar
