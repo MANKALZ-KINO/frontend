@@ -21,7 +21,7 @@ async function fetchMovies() {
                 option.textContent = movie.movieName;
                 option.value = movie.movieId;
                 ddMovies.appendChild(option);
-            });
+            });vhv
 
             // Call fetchMovieGenre with the fetched movies to populate the genre dropdown
             fetchMovieGenre(movies);

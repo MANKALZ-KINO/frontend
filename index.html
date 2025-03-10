@@ -8,9 +8,10 @@
     <script src="js/frontPage.js"></script>
 </head>
 <header>
-    <img src="/images/logo.png" alt="CineNova Logo" class="logo">
+    <img src="/images/logo.png" alt="CineNova Logo" id="homeLogo" class="logo">
 </header>
 <body>
+
 
 <div class="dropdown-container">
     <select id="ddTeater">
@@ -27,6 +28,11 @@
     <select id="ddGenre">
         <option value="">Vælg genre</option>
     </select>
+
+    <button id="seeSeatsBtn">See Seats</button>
+
+    <div class="seats-container" id="seatsContainer" style="display: none;"></div>
+
 </div>
 
 <div id="movieDetails"></div>
@@ -35,9 +41,35 @@
 
 <div id="frontPage"></div>
 
+<div id="create-movie-plan-modal" class="jw-modal">
+    <div class="jw-modal-body">
+        <label>Date</label>
+        <input type="date" id="new-movie-plan-date">
+        <br>
+
+        <label>Theater</label>
+        <select id="new-movie-plan-theater">
+            <option value="1">1</option>
+        </select>
+        <br>
+
+        <label>Time of showing</label>
+        <select id="new-movie-plan-showing">
+            <option value="AFTERNOON">Afternoon</option>
+            <option value="MORNING">Morning</option>
+            <option value="NOON">Noon</option>
+        </select>
+        <br>
+
+        <button onclick="closeModal()">Close</button>
+        <button onclick="saveMoviePlan()">Save</button>
+    </div>
+</div>
+
 </body>
 
 <script src="js/ddChooseMovie.js"></script>
+<script src="js/CreateTicket.js"></script>
 <script src="js/ddChooseTheater.js"></script>
 <script src="js/ddChooseDate.js"></script>
 <script src="js/frontPage.js"></script>
