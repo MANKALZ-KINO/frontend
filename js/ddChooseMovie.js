@@ -67,6 +67,7 @@ async function fetchMovies() {
             // Hvis responsen ikke er OK, log fejl
             console.error("Failed to fetch movies: " + response.statusText);
         }
+
     } catch (error) {
         // Log fejl ved fetch
         console.error("Error fetching movies:", error);
