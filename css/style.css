@@ -1,19 +1,12 @@
-header {
-    background-color: rgba(255, 255, 255, 0.61); /* Blue background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
+/* ELEMENTS STYLE */
+h1 {
+    font-size: 4rem;
+    text-align: center;
+    position: absolute;
     width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000; /* Optional, to ensure it stays above other elements */
-}
-/* Logo styling */
-.logo {
-    width: 150px; /* Adjust size as needed */
-    height: auto;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Basier Square', sans-serif;
 }
 
 .title {
@@ -26,7 +19,7 @@ header {
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background-color: #ffffff; /* Blue background */
+    background-color: #f4f4f4;
     display: flex;
     flex-direction: column; /* Stacks elements vertically */
     align-items: center;
@@ -106,7 +99,7 @@ select:focus {
 }
 
 #movieDetails button {
-    background-color: #175dcc; /* blue background */
+    background-color: #175dcc; /* Green background */
     color: black; /* White text */
     font-size: 16px; /* Font size */
     padding: 15px 30px; /* Padding */
@@ -118,24 +111,6 @@ select:focus {
     position: absolute;
     right: 20px;
     top: 60px;
-}
-#movieDetails button:nth-child(2) {
-    top: 50px; /* Adjust this value to position the second button */
-}
-#movieDetails button:last-child {
-    top: 60px; /* Position the "Back to All Movies" button */
-    left: 50%;
-    max-width: 200px; /* Limit the button width */
-    transform: translateX(-50%);
-    z-index: 1000; /* Ensure it stays above other content */
-}
-
-/* Position adjustments for movie plans button */
-#movieDetails button:first-child {
-    top: 100px; /* Adjust top to your preference */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000; /* Ensure it stays above the content */
 }
 
 #movieDetails button:hover {
@@ -150,36 +125,42 @@ select:focus {
     height: auto; /* Keep the aspect ratio intact */
 }
 
-#frontPage {
+.jw-modal {
+    /* modals are hidden by default */
+    display: none;
 
-    display: flex; /* Align movie containers in a row */
-    flex-direction: row;
-    gap: 20px; /* Add spacing between each movie */
+    /* modal container fixed across whole screen */
+    inset: 0;
+
+    /* z-index must be higher than everything else on the page */
+    z-index: 10000;
+
+    /* semi-transparent black background exposed by padding */
+    background-color: rgba(0, 0, 0, .75);
+    padding: 40px;
+
+    /* enables scrolling for tall modals */
+    overflow: auto;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
-#frontPage. {
-    display: flex;
-    flex-direction: column; /* Stack image and title */
-    align-items: center; /* Center content */
-    text-align: center;
+.jw-modal.open {
+    display: block;
 }
 
-.image-container img {
-    width: 350px;
-    height: auto;
+.jw-modal-body {
+    padding: 20px;
+    background: #fff;
 }
 
-.image-container h3 {
-    margin-top: 10px;
+body.jw-modal-open {
+    /* body overflow is hidden to hide main scrollbar when modal window is open */
+    overflow: hidden;
 }
-
-.image-container img:hover {
-    opacity: 0.8;
-}
-
-
-
-
 
 
 
