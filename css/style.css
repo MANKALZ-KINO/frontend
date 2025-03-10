@@ -14,6 +14,7 @@ header {
 .logo {
     width: 150px; /* Adjust size as needed */
     height: auto;
+    cursor: pointer;
 }
 
 .title {

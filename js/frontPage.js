@@ -17,6 +17,29 @@ async function fetchMovies() {
         console.error("Error fetching movies:", error);
     }
 }
+document.addEventListener("DOMContentLoaded", function () {
+    const homeLogo = document.getElementById("homeLogo");
+    if (homeLogo) {
+        homeLogo.addEventListener("click", function () {
+            // Only reset if movie details are currently shown
+            const movieDetailsContainer = document.getElementById("movieDetails");
+            if (movieDetailsContainer.innerHTML.trim() !== '') {
+                movieDetailsContainer.innerHTML = ''; // Clear movie details
+            }
+
+            // Only reset movie plans if they are shown
+            const moviePlanContainer = document.getElementById("moviePlan");
+            if (moviePlanContainer.innerHTML.trim() !== '') {
+                moviePlanContainer.innerHTML = ''; // Clear movie plan
+            }
+
+            // Re-fetch and display all movies
+            fetchMovies();
+        });
+    }
+});
+
+
 
 async function displayMovies(movies) {
     const frontPageContainer = document.getElementById("frontPage");
