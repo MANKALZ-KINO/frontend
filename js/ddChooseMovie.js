@@ -5,32 +5,6 @@ const ddMovies = document.getElementById("ddMovies");
 const ddGenre = document.getElementById("ddGenre");
 const testBody = document.getElementById("body-container");
 
-// function renderBody() {
-//     if (isUserAuthenticated(auth)) {
-//         testBody.innerHTML = `
-//             <select id="ddTeater">
-//                 <option value="">Vælg sal</option>
-//             </select>
-//
-//             <select id="ddDato">
-//                 <option value="">Vælg dato</option>
-//             </select>
-//             <select id="ddMovies">
-//                 <option value="">Vælg film</option>
-//             </select>
-//
-//             <select id="ddGenre">
-//                 <option value="">Vælg genre</option>
-//             </select>
-//         `
-//         return;
-//     }
-//
-//
-//     testBody.innerHTML = `
-//         Opdater siden :)
-//     `
-// }
 
 function isUserAuthenticated() {
     // TODO: REMOVE THIS
@@ -51,6 +25,7 @@ async function fetchMovies() {
             }
 
             ddMovies.innerHTML = "<option value=''>Vælg en film</option>";
+
             movies.forEach(movie => {
                 const option = document.createElement("option");
                 option.textContent = movie.movieName;
@@ -59,33 +34,28 @@ async function fetchMovies() {
             });
             await fetchMovieGenre(movies);
 
-            // Call fetchMovieGenre with the fetched movies to populate the genre dropdown
             fetchMovieGenre(movies);
 
-            // Display all movies initially
             displayMovies(movies);
         } else {
+
             console.error("Failed to fetch movies: " + response.statusText);
         }
-
     } catch (error) {
+
         console.error("Error fetching movies:", error);
     }
 }
 
 async function fetchMovieGenre(movies) {
     try {
-        // Create a Set to ensure unique genres
         const genres = new Set();
-
-        // Extract genres from movies
         movies.forEach(movie => {
             if (movie.genre) {
                 genres.add(movie.genre);  // Add unique genres to the set
             }
         });
 
-        // If genres are found, populate the genre dropdown
         if (genres.size > 0) {
             // Fjern tidligere elementer fra dropdown
             ddGenre.innerHTML = "<option value=''>Vælg en genre</option>";
@@ -105,23 +75,6 @@ async function fetchMovieGenre(movies) {
     }
 }
 
-async function fetchMoviePlan(movieID) {
-    const urlMoviePlan = `http://localhost:8080/movieplans/${movieID}`;
-    try {
-        const response = await fetch(urlMoviePlan);
-        if (response.ok) {
-            const moviePlans = await response.json();
-            console.log("Movie plans received:", moviePlans);
-            displayMoviePlans(moviePlans); //
-        } else {
-            console.error("Failed to fetch movie plan: " + response.statusText);
-        }
-    } catch (error) {
-        console.error("Error fetching movie plan:", error);
-    }
-}
-
-// Event listener for movie selection
 async function selectMovie(ev) {
     console.log(ev);
     const sel = ddMovies.selectedIndex;
@@ -130,17 +83,13 @@ async function selectMovie(ev) {
     console.log("Valgt film ID: " + movieID);
 
     if (movieID) {
-        // ✅ Clear the full movie list BEFORE showing the selected movie
         const movieListContainer = document.getElementById("frontPage");
         if (movieListContainer) {
             movieListContainer.innerHTML = "";
         }
-
-        // ✅ Fetch and display only the selected movie
         await fetchMovieDetails(movieID);
     }
 }
-
 
 async function fetchMovieDetails(movieID) {
     const urlMovieDetails = `http://localhost:8080/movies/${movieID}`
@@ -157,7 +106,6 @@ async function fetchMovieDetails(movieID) {
     }
 }
 
-//Mangler så at når man clicker på et billede med movie så skal den også opdatere de andre søge kriterier såsom Select movie og genre
 function displayMovieDetails(movie) {
     const movieDetailsContainer = document.getElementById("movieDetails");
 
@@ -192,46 +140,37 @@ function displayMovieDetails(movie) {
     // Movie Plan Button
     const moviePlanButton = document.createElement("button");
     moviePlanButton.textContent = "See Movie Plan";
-    moviePlanButton.id = "moviePlanButton";  // Add an ID
     movieDetailsContainer.appendChild(moviePlanButton);
 
-    // Add event listener for "See Movie Plan" button
-    moviePlanButton.addEventListener("click", function () {
-        fetchMoviePlan(movie.movieId);
+    moviePlanButton.addEventListener("click", () => {
+        movieImage.remove()
+        fetchMoviePlan(movie.movieId)
     });
 
-    console.log("Movie ID for fetching plans:", movie.movieId);
 
-// Add click event to return to the homepage
+    /*
     backLogo.addEventListener("click", () => {
-        // Clear the movie details section
         movieDetailsContainer.innerHTML = '';
 
-        // Clear the movie plans container
         const moviePlanContainer = document.getElementById("moviePlan");
         moviePlanContainer.innerHTML = '';
 
-        // Re-fetch and display all movies
         fetchMovies();
     });
 
-
-
+     */
 
     // Add an event listener for the back button
+    /*
     backButton.addEventListener("click", () => {
-        // Clear movie details section
+
         movieDetailsContainer.innerHTML = '';
-        // Clear the movie plans container (if it's displayed)
+
         const moviePlanContainer = document.getElementById("moviePlan");
         moviePlanContainer.innerHTML = '';
 
-
-        // Re-fetch and display the movies again (or you can show them directly if you already have them in memory)
-        fetchMovies(); // Assuming fetchMovies fetches all movies and displays them on the front page
+        fetchMovies();
     });
-
-    // Event listener for the "See Movie Plan" button
     moviePlanButton.addEventListener("click", () => {
 
         fetchMoviePlan(movie.movieId);
@@ -239,6 +178,8 @@ function displayMovieDetails(movie) {
 
 
     moviePlanButton.addEventListener("click", () => fetchMoviePlan(movie.movieId));
+
+     */
 }
 
 async function fetchMoviePlan(movieID) {
@@ -248,7 +189,7 @@ async function fetchMoviePlan(movieID) {
         if (response.ok) {
             const moviePlans = await response.json();
             console.log("Movie plans received:", moviePlans);
-            displayMoviePlans(moviePlans, movieID); //
+            displayMoviePlans(moviePlans); //
         } else {
             console.error("Failed to fetch movie plan: " + response.statusText);
         }
@@ -258,26 +199,23 @@ async function fetchMoviePlan(movieID) {
 }
 
 
-function displayMoviePlans(moviePlans, movieId) {
+function displayMoviePlans(moviePlans) {
     const moviePlanContainer = document.getElementById("moviePlan");
 
     moviePlanContainer.innerHTML = '';
 
-    if (isUserAuthenticated()) {
-        const moviePlanCreateButton = document.createElement("button");
-        moviePlanCreateButton.textContent = 'Add movie plan';
-        document.getElementById('moviePlan').appendChild(moviePlanCreateButton);
-        moviePlanCreateButton.addEventListener("click", () => openModal('create-movie-plan-modal'));
-    }
-
     moviePlans.forEach(plan => {
         const moviePlanDate = document.createElement('h3');
-        moviePlanDate.textContent = "Show date: " + plan.date
+        moviePlanDate.textContent = "Show date: " + plan.moviePlanDate
         moviePlanContainer.appendChild(moviePlanDate)
 
         const showTime = document.createElement('p');
         showTime.textContent = "Show time: " + plan.showNumber
         moviePlanContainer.appendChild(showTime);
+
+        const theater = document.createElement('p')
+        theater.textContent = "Theater: " + plan.theater.theaterName
+        moviePlanContainer.appendChild(theater)
     });
 }
 
@@ -350,18 +288,12 @@ function selectGenre(ev) {
             fetchMovies();
         }
     }
-
-// Kald fetchMovies når DOM er klar
-// document.addEventListener("DOMContentLoaded", renderBody);
-    document.addEventListener("DOMContentLoaded", fetchMovies);
-    document.addEventListener("DOMContentLoaded", fetchMovieGenre);
-// Event listener for ændringer i dropdown
-    ddMovies.addEventListener('change', selectMovie);
-    ddGenre.addEventListener('change', selectGenre);
 }
 
-
-
-
+// Kald fetchMovies når DOM er klar
+document.addEventListener("DOMContentLoaded", fetchMovies);
+document.addEventListener("DOMContentLoaded", fetchMovieGenre);
+ddMovies.addEventListener('change', selectMovie);
+ddGenre.addEventListener('change', selectGenre);
 
 

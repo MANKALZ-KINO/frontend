@@ -17,6 +17,8 @@ async function fetchMovies() {
         console.error("Error fetching movies:", error);
     }
 }
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const homeLogo = document.getElementById("homeLogo");
     if (homeLogo) {
@@ -38,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
-
 
 
 async function displayMovies(movies) {
