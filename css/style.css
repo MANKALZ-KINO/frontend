@@ -159,6 +159,36 @@ select:focus {
 .image-container img:hover {
     opacity: 0.8;
 }
+/* Container til sæder */
+.seats-container {
+    display: grid;
+    grid-template-columns: repeat(8, 50px); /* 8 sæder per række */
+    gap: 5px;
+    margin-top: 20px;
+}
+
+/* Styling af hvert sæde */
+.seat {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+/* Når et sæde er valgt */
+.seat.selected {
+    background-color: green;
+}
+
+.seat.taken {
+    background-color: red !important; /* Optagede sæder er røde */
+    cursor: not-allowed;
+}
+
 
 #moviePlan {
     width: 100%;
