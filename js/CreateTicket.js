@@ -3,13 +3,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //hvis seattaken sæt rød farve
 
-    const urlAllSeats = "http://localhost:8080/allFreeSeats"
+    const urlAllSeats = "http://localhost:8080/allFreeSeats/${id}"
     const seatsBtn = document.getElementById("seeSeatsBtn");
     const seatsContainer = document.getElementById("seatsContainer");
 
     seatsBtn.addEventListener('click', fetchSeats);
 
-    async function fetchSeats() {
+    async function fetchSeats(moviePlanId) {
         console.log("Jeg laver seats fra backend");
         try {
             const response = await fetch(urlAllSeats);

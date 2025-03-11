@@ -215,7 +215,24 @@ function displayMoviePlans(moviePlans) {
 
         const theater = document.createElement('p')
         theater.textContent = "Theater: " + plan.theater.theaterName
+
         moviePlanContainer.appendChild(theater)
+
+        // Opret book seats knappen
+        const bookSeatsButton = document.createElement("button");
+        bookSeatsButton.textContent = "Choose seats";
+        bookSeatsButton.classList.add("book-seats-btn");
+        bookSeatsButton.dataset.planId = plan.moviePlanId; // Gem planId i knappen
+
+        // Tilføj event listener
+        bookSeatsButton.addEventListener("click", function () {
+            fetchSeats(plan.moviePlanId);
+        });
+
+        planDiv.appendChild(bookSeatsButton); // Tilføj knappen til planen
+        moviePlanContainer.appendChild(planDiv); // Tilføj planen til containeren
+
+
     })
 }
 

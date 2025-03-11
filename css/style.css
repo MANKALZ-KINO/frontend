@@ -184,6 +184,54 @@ select:focus {
     background-color: red;
     cursor: not-allowed;
 }
+.movie-plan {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+.book-seats-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.book-seats-btn:hover {
+    background-color: #218838;
+}
+.seats-container {
+    display: grid;
+    grid-template-columns: repeat(8, 40px);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.seat {
+    width: 40px;
+    height: 40px;
+    background-color: #4CAF50;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.seat.taken {
+    background-color: #d9534f; /* Rød farve for optaget sæde */
+    cursor: not-allowed;
+}
+
+.seat.selected {
+    background-color: #f0ad4e; /* Orange farve for valgt sæde */
+}
 
 
 
