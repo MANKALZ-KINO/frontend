@@ -216,7 +216,15 @@ function displayMoviePlans(moviePlans) {
         const theater = document.createElement('p')
         theater.textContent = "Theater: " + plan.theater.theaterName
         moviePlanContainer.appendChild(theater)
-    });
+
+        const bookButton = document.createElement('button')
+        bookButton.textContent = "Book"
+        moviePlanContainer.appendChild(bookButton)
+
+        bookButton.addEventListener("click", () => {
+            fetchSeatsForMoviePlan(plan.moviePlanId)
+        });
+    })
 }
 
 // open modal by id
@@ -254,7 +262,7 @@ async function saveMoviePlan() {
     }
 }
 
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     // close modals on background click
     document.addEventListener('click', event => {
         if (event.target.classList.contains('jw-modal')) {
