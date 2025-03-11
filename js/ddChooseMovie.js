@@ -216,14 +216,6 @@ function displayMoviePlans(moviePlans) {
         const theater = document.createElement('p')
         theater.textContent = "Theater: " + plan.theater.theaterName
         moviePlanContainer.appendChild(theater)
-
-        const bookButton = document.createElement('button')
-        bookButton.textContent = "Book"
-        moviePlanContainer.appendChild(bookButton)
-
-        bookButton.addEventListener("click", () => {
-            fetchSeatsForMoviePlan(plan.moviePlanId)
-        });
     })
 }
 
