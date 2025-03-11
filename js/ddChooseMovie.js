@@ -360,9 +360,8 @@ async function fetchSeats(moviePlanId) {
         let seats = await response.json();
         console.log("Sæder modtaget:", seats);
 
-        const filteredSeats = seats.filter(seat => seat.moviePlanId == moviePlanId);
 
-        createSeats(filteredSeats);
+        createSeats(seats);
     } catch (error) {
         console.error("Fejl ved hentning af sæder:", error);
     }
@@ -408,3 +407,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+//note
