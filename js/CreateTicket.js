@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //hvis seattaken sæt rød farve
 
-    const urlAllSeats = "http://localhost:8080/allFreeSeats/${id}"
+    const urlAllSeats = `http://localhost:8080/allFreeSeats/${moviePlanId}`;
     const seatsBtn = document.getElementById("seeSeatsBtn");
     const seatsContainer = document.getElementById("seatsContainer");
 

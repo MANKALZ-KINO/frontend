@@ -210,6 +210,9 @@ function displayMoviePlans(moviePlans) {
     moviePlanContainer.innerHTML = '';
 
     moviePlans.forEach(plan => {
+        const planDiv = document.createElement("div");
+        planDiv.classList.add("movie-plan");
+
         const moviePlanDate = document.createElement('h3');
         moviePlanDate.textContent = "Show date: " + plan.moviePlanDate
         moviePlanContainer.appendChild(moviePlanDate)
@@ -235,8 +238,7 @@ function displayMoviePlans(moviePlans) {
         });
 
         planDiv.appendChild(bookSeatsButton); // Tilføj knappen til planen
-        moviePlanContainer.appendChild(planDiv); // Tilføj planen til containeren
-
+        moviePlanContainer.appendChild(planDiv);
 
     })
 }

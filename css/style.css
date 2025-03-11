@@ -232,6 +232,28 @@ select:focus {
 .seat.selected {
     background-color: #f0ad4e; /* Orange farve for valgt sæde */
 }
+.book-seats-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: block;
+}
+
+.book-seats-btn:hover {
+    background-color: #218838;
+}
+
+.movie-plan {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
 
 
 
