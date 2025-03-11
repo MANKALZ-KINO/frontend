@@ -227,15 +227,23 @@ function displayMoviePlans(moviePlans) {
         moviePlanContainer.appendChild(theater)
 
         // Opret book seats knappen
+
         const bookSeatsButton = document.createElement("button");
         bookSeatsButton.textContent = "Choose seats";
         bookSeatsButton.classList.add("book-seats-btn");
-        bookSeatsButton.dataset.planId = plan.moviePlanId; // Gem planId i knappen
 
-        // Tilføj event listener
+// Brug dataset til at gemme moviePlanId og theaterId
+        bookSeatsButton.dataset.planId = plan.moviePlanId;
+        bookSeatsButton.dataset.theaterId = plan.theater.theaterId;
+
+// Knyt event listener til knappen
         bookSeatsButton.addEventListener("click", function () {
-            fetchSeats(plan.moviePlanId);
+            const moviePlanId = this.dataset.planId; // Henter moviePlanId fra knappen
+            fetchSeats(moviePlanId); // Henter kun sæder til denne MoviePlan
         });
+
+        planDiv.appendChild(bookSeatsButton);
+
 
         planDiv.appendChild(bookSeatsButton); // Tilføj knappen til planen
         moviePlanContainer.appendChild(planDiv);
@@ -349,13 +357,17 @@ async function fetchSeats(moviePlanId) {
             throw new Error("Fejl ved hentning af sæder: " + response.statusText);
         }
 
-        const seats = await response.json();
+        let seats = await response.json();
         console.log("Sæder modtaget:", seats);
-        createSeats(seats);
+
+        const filteredSeats = seats.filter(seat => seat.moviePlanId == moviePlanId);
+
+        createSeats(filteredSeats);
     } catch (error) {
         console.error("Fejl ved hentning af sæder:", error);
     }
 }
+
 
 // Funktion til at vise sæder i UI
 function createSeats(seats) {

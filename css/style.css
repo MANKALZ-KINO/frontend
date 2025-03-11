@@ -207,21 +207,19 @@ select:focus {
 }
 .seats-container {
     display: grid;
-    grid-template-columns: repeat(8, 50px); /* 8 sæder pr. række */
+    grid-template-columns: repeat(8, 50px);
     gap: 12px;
-    margin-top: 20px;
     justify-content: center;
     padding: 20px;
-    background-color: #f5f5f5; /* Let baggrund for at skille sig ud */
+    background-color: #f5f5f5;
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Standard sæde */
 .seat {
     width: 50px;
     height: 50px;
-    background-color: #4CAF50; /* Grøn for ledige sæder */
+    background-color: #4CAF50;
     color: white;
     display: flex;
     align-items: center;
@@ -230,31 +228,20 @@ select:focus {
     cursor: pointer;
     font-weight: bold;
     font-size: 14px;
-    text-align: center;
     transition: all 0.3s ease;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Optaget sæde */
 .seat.taken {
-    background-color: #d9534f; /* Rød for optaget sæde */
+    background-color: #d9534f;
     cursor: not-allowed;
-    color: #ffffff;
-    box-shadow: none;
 }
 
-/* Valgt sæde */
 .seat.selected {
-    background-color: #f0ad4e; /* Orange for valgt sæde */
+    background-color: #f0ad4e;
 }
 
-/* Hover-effekt for ledige sæder */
 .seat:not(.taken):hover {
     background-color: #45a049;
-    transform: scale(1.1); /* Gør sædet lidt større */
-}
-
-/* Hover-effekt for valgte sæder */
-.seat.selected:hover {
-    background-color: #e69529;
+    transform: scale(1.1);
 }
