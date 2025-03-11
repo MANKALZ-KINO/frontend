@@ -87,6 +87,11 @@ async function selectMovie(ev) {
         if (movieListContainer) {
             movieListContainer.innerHTML = "";
         }
+        const moviePlanContainer = document.getElementById("moviePlan");
+        if (moviePlanContainer) {
+            moviePlanContainer.innerHTML = "";
+        }
+
         await fetchMovieDetails(movieID);
     }
 }
@@ -280,13 +285,23 @@ window.addEventListener('load', function () {
     });
 });
 
-// Event listener for movie genre selection
+
 async function selectGenre(ev) {
     console.log(ev);
     const sel = ddGenre.selectedIndex;
     const selectedOption = ddGenre.options[sel];
     const selectedGenre = selectedOption.value;
     console.log("Valgt genre: " + selectedGenre);
+
+    const movieDetailsContainer = document.getElementById("movieDetails");
+    if (movieDetailsContainer) {
+        movieDetailsContainer.innerHTML = "";
+    }
+
+    const moviePlanContainer = document.getElementById("moviePlan");
+    if (moviePlanContainer) {
+        moviePlanContainer.innerHTML = "";
+    }
 
     if (selectedGenre) {
         try {
@@ -295,7 +310,7 @@ async function selectGenre(ev) {
                 const movies = await response.json();
                 const filteredMovies = movies.filter(movie => movie.genre === selectedGenre);
 
-                displayMovies(filteredMovies); // Show only movies matching the selected genre
+                displayMovies(filteredMovies);
             } else {
                 console.error("Failed to fetch movies: " + response.statusText);
             }
@@ -303,7 +318,6 @@ async function selectGenre(ev) {
             console.error("Error fetching movies:", error);
         }
     } else {
-        // If no genre is selected, show all movies
         fetchMovies();
     }
 }
