@@ -33,3 +33,4 @@ async function fetchTheaters(){
 
 
 document.addEventListener("DOMContentLoaded", fetchTheaters);
+
