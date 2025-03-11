@@ -264,31 +264,36 @@ window.addEventListener('load', function() {
 });
 
 // Event listener for movie genre selection
-function selectGenre(ev) {
-// Event listener for genre selection
-    async function selectGenre(ev) {
-        console.log(ev);
-        const sel = ddGenre.selectedIndex;
-        const selectedOption = ddGenre.options[sel];
-        const selectedGenre = selectedOption.value;
-        console.log("Valgt genre: " + selectedGenre);
+async function selectGenre(ev) {
+    console.log(ev);
+    const sel = ddGenre.selectedIndex;
+    const selectedOption = ddGenre.options[sel];
+    const selectedGenre = selectedOption.value;
+    console.log("Valgt genre: " + selectedGenre);
 
-        if (selectedGenre) {
-            // Fetch movies and filter them by genre
+    if (selectedGenre) {
+        try {
             const response = await fetch(urlMovies);
             if (response.ok) {
                 const movies = await response.json();
                 const filteredMovies = movies.filter(movie => movie.genre === selectedGenre);
-                displayMovies(filteredMovies); // Show filtered movies
+
+                displayMovies(filteredMovies); // Show only movies matching the selected genre
             } else {
                 console.error("Failed to fetch movies: " + response.statusText);
             }
-        } else {
-            // If no genre is selected, show all movies
-            fetchMovies();
+        } catch (error) {
+            console.error("Error fetching movies:", error);
         }
+    } else {
+        // If no genre is selected, show all movies
+        fetchMovies();
     }
 }
+
+// Assign event listener properly
+ddGenre.addEventListener('change', selectGenre);
+
 
 // Kald fetchMovies når DOM er klar
 document.addEventListener("DOMContentLoaded", fetchMovies);
