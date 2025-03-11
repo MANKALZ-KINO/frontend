@@ -8,8 +8,19 @@
     <title>CineNova</title>
     <script src="js/frontPage.js"></script>
 </head>
-<header>
-    <img src="/images/logo.png" alt="CineNova Logo" id="homeLogo" class="logo">
+<header id="ddHeader">
+    <img src="/images/logo.png" alt="CineNova Logo" id="homeLogo" class="logo" style="position: absolute;">
+    <!-- MAKE CLASSES FOR BUTTONS -->
+    <button id="loginButton" style="
+    position: absolute;
+    right: 8px;">
+        Login
+    </button>
+    <button id="logoutButton" onclick="logout()" style="
+    position: absolute;
+    right: 8px;">
+        Logout
+    </button>
 </header>
 <body>
 <button id="seeSeatsBtn">See Seats</button>
@@ -42,6 +53,24 @@
 
 <div id="bookingPage"></div>
 
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span id="closeModalButton" class="close">&times;</span>
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</div>
+
+<div id="loginErrorBanner" class="login-error-banner">
+    Kunne ikke logge ind... Prøv venligst igen.
+</div>
+
 </body>
 
 <script src="js/ddChooseTheater.js"></script>
@@ -49,6 +78,7 @@
 <script src="js/CreateTicket.js"></script>
 <script src="js/frontPage.js"></script>
 <script src="js/booking.js"></script>
+<script src="js/ddLogin.js"></script>
 </html>
 
 
