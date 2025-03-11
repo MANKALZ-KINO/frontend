@@ -335,3 +335,64 @@ ddMovies.addEventListener('change', selectMovie);
 ddGenre.addEventListener('change', selectGenre);
 
 
+//SEATS
+console.log("Jeg er i seeSeatsBtn!");
+
+// Funktion til at hente sæder
+async function fetchSeats(moviePlanId) {
+    const urlAllSeats = `http://localhost:8080/allFreeSeats/${moviePlanId}`;
+    console.log(`Henter sæder for moviePlanId: ${moviePlanId}`);
+
+    try {
+        const response = await fetch(urlAllSeats);
+        if (!response.ok) {
+            throw new Error("Fejl ved hentning af sæder: " + response.statusText);
+        }
+
+        const seats = await response.json();
+        console.log("Sæder modtaget:", seats);
+        createSeats(seats);
+    } catch (error) {
+        console.error("Fejl ved hentning af sæder:", error);
+    }
+}
+
+// Funktion til at vise sæder i UI
+function createSeats(seats) {
+    const seatsContainer = document.getElementById("seatsContainer");
+    seatsContainer.style.display = "grid";
+    seatsContainer.innerHTML = ""; // Rens containeren
+
+    seats.forEach(seat => {
+        let seatElement = document.createElement("div");
+        seatElement.textContent = `Row ${seat.rowNum}, Seat ${seat.seatNumb}`;
+        seatElement.classList.add("seat");
+
+        if (seat.seatTaken) {
+            seatElement.classList.add("taken");
+        }
+
+        seatElement.addEventListener("click", function () {
+            console.log(`Valgt sæde: Række ${seat.rowNum}, Sæde ${seat.seatNumb}`);
+            seatElement.classList.toggle("selected");
+        });
+
+        seatsContainer.appendChild(seatElement);
+    });
+}
+
+// Event listener til "Choose seats" knappen
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOMContentLoaded kører!");
+
+    const seatsBtn = document.getElementById("seeSeatsBtn");
+
+    if (seatsBtn) {
+        seatsBtn.addEventListener("click", function () {
+            const moviePlanId = prompt("Indtast MoviePlan ID:");
+            if (moviePlanId) {
+                fetchSeats(moviePlanId);
+            }
+        });
+    }
+});
