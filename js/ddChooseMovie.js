@@ -216,7 +216,7 @@ function displayMoviePlans(moviePlans) {
         const theater = document.createElement('p')
         theater.textContent = "Theater: " + plan.theater.theaterName
         moviePlanContainer.appendChild(theater)
-    });
+    })
 }
 
 // open modal by id
@@ -254,7 +254,7 @@ async function saveMoviePlan() {
     }
 }
 
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     // close modals on background click
     document.addEventListener('click', event => {
         if (event.target.classList.contains('jw-modal')) {
