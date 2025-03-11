@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("Sæder modtaget:", seats);
 
             createSeats(seats);
+
         } catch (error) {
             console.log("feeejl")
         }
@@ -40,6 +41,11 @@ document.addEventListener("DOMContentLoaded", function () {
             let seatElement = document.createElement("div");
             seatElement.textContent = `Row ${seat.rowNum}, Seat ${seat.seatNumb}`;
             seatElement.classList.add("seat");
+
+            //hvis sædet er optaget (seat_taken == true) lav det rødt
+            if(seat.seatTaken) {
+                seatElement.classList.add("taken")
+            }
 
             seatElement.addEventListener("click", function () {
                 console.log(`Valgt sæde: Række ${seat.rowNum}, Sæde ${seat.seatNumb}`);

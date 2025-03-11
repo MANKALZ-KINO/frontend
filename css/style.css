@@ -183,6 +183,11 @@ select:focus {
     background-color: green;
 }
 
+.seat.taken {
+    background-color: red !important; /* Optagede sæder er røde */
+    cursor: not-allowed;
+}
+
 
 
 
