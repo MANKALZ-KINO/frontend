@@ -79,3 +79,4 @@ async function displayMovies(movies) {
 
 document.addEventListener("DOMContentLoaded", fetchMovies);
 
+
