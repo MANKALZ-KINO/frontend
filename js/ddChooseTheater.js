@@ -19,7 +19,7 @@ async function fetchTheaters(){
             option.value = theater.theaterId;
             ddTeater.appendChild(option);
         });
-        fetchTheaters(theaters)
+        //fetchTheaters(theaters)
     } catch (error){
         console.log("Error fetching Theaters")
     }
