@@ -1,7 +1,9 @@
 console.log("jeg er i createTicket!!");
+//fetchmovies
 //vis alle movieplans
 //display seat number(displayticket)
 //bestille flere biletter
+
 
 
 export async function createTicket(seatId, phoneNumber, moviePlanId){
