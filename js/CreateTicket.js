@@ -57,6 +57,7 @@ function displayTicketDetails(ticket) {
         `📞 Phone Number: ${ticket.phoneNumber}\n` +
         `💰 Price: ${ticket.ticket_price} DKK`
     );
+    location.reload();
 }
 
 
