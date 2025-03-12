@@ -1,59 +1,53 @@
-document.addEventListener("DOMContentLoaded", function () {
-    console.log("Jeg er i seeSeatsBtn!");
+console.log("jeg er i createTicket!!");
 
-    //hvis seattaken sæt rød farve
+async function createTicket(seatId, phoneNumber){
+    const URLCreateTicket = "http://localhost:8080/ticket/createTicket";
+    const ticketData = {
+        seatId: seatId,
+        phoneNumber: phoneNumber,
+        price: 100 // Tilføj en fast pris eller hent den dynamisk
+    };
 
-    const urlAllSeats = "http://localhost:8080/allFreeSeats"
-    const seatsBtn = document.getElementById("seeSeatsBtn");
-    const seatsContainer = document.getElementById("seatsContainer");
-
-    seatsBtn.addEventListener('click', fetchSeats);
-
-    async function fetchSeats() {
-        console.log("Jeg laver seats fra backend");
-        try {
-            const response = await fetch(urlAllSeats);
-            if (!response.ok) {
-                throw new Error("Fejl ved hentning af sæder: ");
-            }
-
-            const seats = await response.json();
-            console.log("Sæder modtaget:", seats);
-
-            createSeats(seats);
-
-        } catch (error) {
-            console.log("feeejl")
-        }
-    }
-
-    function createSeats(seats) {
-
-        // Gør seatsContainer synlig
-        seatsContainer.style.display = "grid";
-        seatsContainer.innerHTML = ""; // Rens containeren for at undgå dubletter
-
-
-        const totalRows = 8;
-        const seatsPerRow = 8;
-
-        seats.forEach(seat => {
-            let seatElement = document.createElement("div");
-            seatElement.textContent = `Row ${seat.rowNum}, Seat ${seat.seatNumb}`;
-            seatElement.classList.add("seat");
-
-            //hvis sædet er optaget (seat_taken == true) lav det rødt
-            if(seat.seatTaken) {
-                seatElement.classList.add("taken")
-            }
-
-            seatElement.addEventListener("click", function () {
-                console.log(`Valgt sæde: Række ${seat.rowNum}, Sæde ${seat.seatNumb}`);
-                seatElement.classList.toggle("selected");
-            });
-
-            seatsContainer.appendChild(seatElement);
-
+    try {
+        const response = await fetch(URLCreateTicket, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(ticketData)
         });
+
+    if (response.ok) {
+            const ticket = await response.json()
+            displayTicketDetails(ticket)
+        } else {
+            console.error("Failed to fetch ticket details: " + response.statusText)
+        }
+    } catch (error) {
+        console.error("Error fetching ticket details:", error)
     }
-});
+}
+
+function displayTicketDetails(ticket) {
+    const ticketDetailsContainer = document.getElementById("ticketDetails");
+
+    // Clear container
+    ticketDetailsContainer.innerHTML = '';
+
+    // Movie title
+    const ticketId = document.createElement('h2');
+    ticketId.textContent = ticket.ticketID;
+    ticketDetailsContainer.appendChild(ticketId);
+
+    // ticket phonenumber
+    const ticketPhonenumber = document.createElement('p');
+    ticketPhonenumber.textContent = ticket.phoneNumber;
+    ticketDetailsContainer.appendChild(ticketPhonenumber);
+
+    // ticket price
+    const ticketPrice = document.createElement('p');
+    ticketPrice.textContent = ticket.ticket_price;
+    ticketDetailsContainer.appendChild(ticketPrice);
+
+}
+

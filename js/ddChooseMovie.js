@@ -400,6 +400,21 @@ function createSeats(seats) {
             seatElement.addEventListener("click", function () {
                 console.log(`Valgt sæde: Række ${seat.rowNum}, Sæde ${seat.seatNumb}`);
                 seatElement.classList.toggle("selected");
+                if (seatElement.classList.contains("selected")) {
+                    const ticketbutton = document.createElement("button");
+                    ticketbutton.classList.add("buyticketbutton");
+                    ticketbutton.textContent = "Buy Ticket!";
+                    ticketbutton.style.padding = "10px";
+                    ticketbutton.style.backgroundColor = "blue";
+                    ticketbutton.style.color = "white";
+                    ticketbutton.addEventListener("click", function () {
+                        const phoneNumber = prompt("Indtast dit telefonnummer:");
+                        if (phoneNumber) {
+                            createTicket(seat.seatId, phoneNumber);
+                        }
+                    });
+                    seatsContainer.appendChild(ticketbutton);
+                }
             });
 
             rowDiv.appendChild(seatElement);
@@ -408,6 +423,8 @@ function createSeats(seats) {
         seatsContainer.appendChild(rowDiv);
     });
 }
+
+
 
 // Event listener til "Choose seats" knappen
 document.addEventListener("DOMContentLoaded", function () {
