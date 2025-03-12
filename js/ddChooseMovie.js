@@ -371,24 +371,41 @@ async function fetchSeats(moviePlanId) {
 // Funktion til at vise sæder i UI
 function createSeats(seats) {
     const seatsContainer = document.getElementById("seatsContainer");
-    seatsContainer.style.display = "grid";
     seatsContainer.innerHTML = ""; // Rens containeren
 
+    let rows = {}; // Opbevar sæder sorteret efter række
+
+    // Opdel sæder efter række
     seats.forEach(seat => {
-        let seatElement = document.createElement("div");
-        seatElement.textContent = `Row ${seat.rowNum}, Seat ${seat.seatNumb}`;
-        seatElement.classList.add("seat");
-
-        if (seat.seatTaken) {
-            seatElement.classList.add("taken");
+        if (!rows[seat.rowNum]) {
+            rows[seat.rowNum] = [];
         }
+        rows[seat.rowNum].push(seat);
+    });
 
-        seatElement.addEventListener("click", function () {
-            console.log(`Valgt sæde: Række ${seat.rowNum}, Sæde ${seat.seatNumb}`);
-            seatElement.classList.toggle("selected");
+    // Opret rækker
+    Object.keys(rows).forEach(rowNum => {
+        let rowDiv = document.createElement("div");
+        rowDiv.classList.add("seat-row");
+
+        rows[rowNum].forEach(seat => {
+            let seatElement = document.createElement("div");
+            seatElement.textContent = `Row ${seat.rowNum}, Seat ${seat.seatNumb}`;
+            seatElement.classList.add("seat");
+
+            if (seat.seatTaken) {
+                seatElement.classList.add("taken");
+            }
+
+            seatElement.addEventListener("click", function () {
+                console.log(`Valgt sæde: Række ${seat.rowNum}, Sæde ${seat.seatNumb}`);
+                seatElement.classList.toggle("selected");
+            });
+
+            rowDiv.appendChild(seatElement);
         });
 
-        seatsContainer.appendChild(seatElement);
+        seatsContainer.appendChild(rowDiv);
     });
 }
 
