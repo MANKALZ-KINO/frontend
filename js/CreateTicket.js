@@ -1,7 +1,7 @@
 console.log("jeg er i createTicket!!");
 //movieplans vises ikke alle sammen
 //forside virker ikke
-//display ticket
+
 
 export async function createTicket(seatId, phoneNumber, moviePlanId){
     console.log("CREATETICKET BLIVER KALDT")
