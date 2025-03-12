@@ -17,11 +17,12 @@ export async function createTicket(seatId, phoneNumber, moviePlanId){
     const URLCreateTicket = "http://localhost:8080/ticket/createTicket";
     const ticketData = {
         order_date: new Date().toISOString().split("T")[0], // Automatisk dags dato
-        seatId: seatId,
-        moviePlanId: moviePlanId,
         phoneNumber: phoneNumberInt,
-        price: 100
+        ticket_price: 100,
+        seat: { seatId: seatId },  // Ændret fra seatId til et seat-objekt
+        moviePlan: { moviePlanId: moviePlanId } // Ændret fra moviePlanId til et moviePlan-objekt
     };
+
 
     console.log("Sender ticket data:", JSON.stringify(ticketData));
 

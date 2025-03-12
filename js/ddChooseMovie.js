@@ -442,6 +442,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
 //note
 //før videre til en create ticket
 //indtast tlf nummer og sørg for at sende det rigtige seat med
