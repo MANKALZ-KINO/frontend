@@ -1,4 +1,7 @@
 console.log("jeg er i createTicket!!");
+//movieplans vises ikke alle sammen
+//forside virker ikke
+//display ticket
 
 export async function createTicket(seatId, phoneNumber, moviePlanId){
     console.log("CREATETICKET BLIVER KALDT")
@@ -48,25 +51,12 @@ export async function createTicket(seatId, phoneNumber, moviePlanId){
 }
 
 function displayTicketDetails(ticket) {
-    const ticketDetailsContainer = document.getElementById("ticketDetails");
-
-    // Clear container
-    ticketDetailsContainer.innerHTML = '';
-
-    // Movie title
-    const ticketId = document.createElement('h2');
-    ticketId.textContent = ticket.ticketID;
-    ticketDetailsContainer.appendChild(ticketId);
-
-    // ticket phonenumber
-    const ticketPhonenumber = document.createElement('p');
-    ticketPhonenumber.textContent = ticket.phoneNumber;
-    ticketDetailsContainer.appendChild(ticketPhonenumber);
-
-    // ticket price
-    const ticketPrice = document.createElement('p');
-    ticketPrice.textContent = ticket.ticket_price;
-    ticketDetailsContainer.appendChild(ticketPrice);
-
+    confirm(
+        `✅ Order Successful!\n\n` +
+        `🎟 Ticket ID: ${ticket.ticketID}\n` +
+        `📞 Phone Number: ${ticket.phoneNumber}\n` +
+        `💰 Price: ${ticket.ticket_price} DKK`
+    );
 }
+
 
