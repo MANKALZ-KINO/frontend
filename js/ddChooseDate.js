@@ -26,7 +26,6 @@ async function fetchDates(){
     }
 
 
-console.log("Jeg er i ddChooseDate");
 document.addEventListener("DOMContentLoaded", () => {
     console.log("DOMContentLoaded event fired");
     fetchDates();

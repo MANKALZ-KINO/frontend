@@ -1,4 +1,4 @@
-const moviesUrl = "http://localhost:8080/movies";
+export const moviesUrl = "http://localhost:8080/movies";
 
 async function fetchMovies() {
     try {
