@@ -210,6 +210,9 @@ function displayMoviePlans(moviePlans) {
     moviePlanContainer.innerHTML = '';
 
     moviePlans.forEach(plan => {
+        const planDiv = document.createElement("div");
+        planDiv.classList.add("movie-plan");
+
         const moviePlanDate = document.createElement('h3');
         moviePlanDate.textContent = "Show date: " + plan.moviePlanDate
         moviePlanContainer.appendChild(moviePlanDate)
@@ -220,7 +223,31 @@ function displayMoviePlans(moviePlans) {
 
         const theater = document.createElement('p')
         theater.textContent = "Theater: " + plan.theater.theaterName
+
         moviePlanContainer.appendChild(theater)
+
+        // Opret book seats knappen
+
+        const bookSeatsButton = document.createElement("button");
+        bookSeatsButton.textContent = "Choose seats";
+        bookSeatsButton.classList.add("book-seats-btn");
+
+// Brug dataset til at gemme moviePlanId og theaterId
+        bookSeatsButton.dataset.planId = plan.moviePlanId;
+        bookSeatsButton.dataset.theaterId = plan.theater.theaterId;
+
+// Knyt event listener til knappen
+        bookSeatsButton.addEventListener("click", function () {
+            const moviePlanId = this.dataset.planId; // Henter moviePlanId fra knappen
+            fetchSeats(moviePlanId); // Henter kun sæder til denne MoviePlan
+        });
+
+        planDiv.appendChild(bookSeatsButton);
+
+
+        planDiv.appendChild(bookSeatsButton); // Tilføj knappen til planen
+        moviePlanContainer.appendChild(planDiv);
+
     })
 }
 
@@ -316,3 +343,88 @@ ddMovies.addEventListener('change', selectMovie);
 ddGenre.addEventListener('change', selectGenre);
 
 
+//SEATS
+console.log("Jeg er i seeSeatsBtn!");
+
+// Funktion til at hente sæder
+async function fetchSeats(moviePlanId) {
+    const urlAllSeats = `http://localhost:8080/allFreeSeats/${moviePlanId}`;
+    console.log(`Henter sæder for moviePlanId: ${moviePlanId}`);
+
+    try {
+        const response = await fetch(urlAllSeats);
+        if (!response.ok) {
+            throw new Error("Fejl ved hentning af sæder: " + response.statusText);
+        }
+
+        let seats = await response.json();
+        console.log("Sæder modtaget:", seats);
+
+
+        createSeats(seats);
+    } catch (error) {
+        console.error("Fejl ved hentning af sæder:", error);
+    }
+}
+
+
+// Funktion til at vise sæder i UI
+function createSeats(seats) {
+    const seatsContainer = document.getElementById("seatsContainer");
+    seatsContainer.innerHTML = ""; // Rens containeren
+
+    let rows = {}; // Opbevar sæder sorteret efter række
+
+    // Opdel sæder efter række
+    seats.forEach(seat => {
+        if (!rows[seat.rowNum]) {
+            rows[seat.rowNum] = [];
+        }
+        rows[seat.rowNum].push(seat);
+    });
+
+    // Opret rækker
+    Object.keys(rows).forEach(rowNum => {
+        let rowDiv = document.createElement("div");
+        rowDiv.classList.add("seat-row");
+
+        rows[rowNum].forEach(seat => {
+            let seatElement = document.createElement("div");
+            seatElement.textContent = `Row ${seat.rowNum}, Seat ${seat.seatNumb}`;
+            seatElement.classList.add("seat");
+
+            if (seat.seatTaken) {
+                seatElement.classList.add("taken");
+            }
+
+            seatElement.addEventListener("click", function () {
+                console.log(`Valgt sæde: Række ${seat.rowNum}, Sæde ${seat.seatNumb}`);
+                seatElement.classList.toggle("selected");
+            });
+
+            rowDiv.appendChild(seatElement);
+        });
+
+        seatsContainer.appendChild(rowDiv);
+    });
+}
+
+// Event listener til "Choose seats" knappen
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOMContentLoaded kører!");
+
+    const seatsBtn = document.getElementById("seeSeatsBtn");
+
+    if (seatsBtn) {
+        seatsBtn.addEventListener("click", function () {
+            const moviePlanId = prompt("Indtast MoviePlan ID:");
+            if (moviePlanId) {
+                fetchSeats(moviePlanId);
+            }
+        });
+    }
+});
+//note
+//før videre til en create ticket
+//indtast tlf nummer og sørg for at sende det rigtige seat med
+//sørg før at automatisk udfylde de andre attributter

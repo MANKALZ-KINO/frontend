@@ -12,6 +12,9 @@
     <img src="/images/logo.png" alt="CineNova Logo" id="homeLogo" class="logo">
 </header>
 <body>
+<button id="seeSeatsBtn">See Seats</button>
+
+<div class="seats-container" id="seatsContainer"></div>
 
 
 <div class="dropdown-container">
@@ -29,11 +32,6 @@
     <select id="ddGenre">
         <option value="">Vælg genre</option>
     </select>
-
-    <button id="seeSeatsBtn">See Seats</button>
-
-    <div class="seats-container" id="seatsContainer" style="display: none;"></div>
-
 </div>
 
 <div id="movieDetails"></div>
@@ -46,10 +44,9 @@
 
 </body>
 
+<script src="js/ddChooseTheater.js"></script>
 <script src="js/ddChooseMovie.js"></script>
 <script src="js/CreateTicket.js"></script>
-<script src="js/ddChooseTheater.js"></script>
-<script src="js/ddChooseDate.js"></script>
 <script src="js/frontPage.js"></script>
 <script src="js/booking.js"></script>
 </html>
