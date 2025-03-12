@@ -37,6 +37,7 @@ export async function createTicket(seatId, phoneNumber, moviePlanId){
 
     if (response.ok) {
             const ticket = await response.json()
+        confirm("Order went through, you now have a ticket!");
             displayTicketDetails(ticket)
         } else {
             console.error("Failed to fetch ticket details: " + response.statusText)
