@@ -1,6 +1,7 @@
 console.log("jeg er i createTicket!!");
-//movieplans vises ikke alle sammen
-//forside virker ikke
+//vis alle movieplans
+//display seat number(displayticket)
+//bestille flere biletter
 
 
 export async function createTicket(seatId, phoneNumber, moviePlanId){
@@ -21,7 +22,7 @@ export async function createTicket(seatId, phoneNumber, moviePlanId){
     const ticketData = {
         order_date: new Date().toISOString().split("T")[0], // Automatisk dags dato
         phoneNumber: phoneNumberInt,
-        ticket_price: 100,
+        ticket_price: 120,
         seat: { seatId: seatId },  // Ændret fra seatId til et seat-objekt
         moviePlan: { moviePlanId: moviePlanId } // Ændret fra moviePlanId til et moviePlan-objekt
     };
@@ -41,7 +42,8 @@ export async function createTicket(seatId, phoneNumber, moviePlanId){
     if (response.ok) {
             const ticket = await response.json()
         confirm("Order went through, you now have a ticket!");
-            displayTicketDetails(ticket)
+        console.log("Modtaget ticket JSON fra backend:", ticket);
+        displayTicketDetails(ticket)
         } else {
             console.error("Failed to fetch ticket details: " + response.statusText)
         }
@@ -49,14 +51,28 @@ export async function createTicket(seatId, phoneNumber, moviePlanId){
         console.error("Error fetching ticket details:", error)
     }
 }
-
 function displayTicketDetails(ticket) {
+    console.log("Modtaget ticket JSON fra backend:", ticket);
+    console.log("seat:", ticket.seat);
+    console.log("seat.rowNum:", ticket.seat?.rowNum);
+
+    let seatInfo = "📍 Seat: Not Available";
+
+    if (ticket.seat) {
+        seatInfo = `📍 Seat: Row ${ticket.seat.rowNum}, Seat ${ticket.seat.seatNumb}`;
+    }
+
     confirm(
         `✅ Order Successful!\n\n` +
         `🎟 Ticket ID: ${ticket.ticketID}\n` +
+        `📅 Order Date: ${ticket.order_date}\n` +
         `📞 Phone Number: ${ticket.phoneNumber}\n` +
-        `💰 Price: ${ticket.ticket_price} DKK`
+        `💰 Price: ${ticket.ticket_price} DKK\n` +
+        `🎬 Movie: ${ticket.moviePlan.movie.movieName}\n` +
+        seatInfo + `\n` +
+        `🕒 Showtime: ${ticket.moviePlan.showNumber}`
     );
+
     location.reload();
 }
 
