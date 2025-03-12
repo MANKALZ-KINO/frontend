@@ -1,3 +1,4 @@
+import { createTicket } from "./CreateTicket.js";
 const urlMovies = "http://localhost:8080/movies";
 console.log("Jeg er i ddChooseMovie");
 
@@ -361,7 +362,7 @@ async function fetchSeats(moviePlanId) {
         console.log("Sæder modtaget:", seats);
 
 
-        createSeats(seats);
+        createSeats(seats, moviePlanId);
     } catch (error) {
         console.error("Fejl ved hentning af sæder:", error);
     }
@@ -369,7 +370,7 @@ async function fetchSeats(moviePlanId) {
 
 
 // Funktion til at vise sæder i UI
-function createSeats(seats) {
+function createSeats(seats, moviePlanId) {
     const seatsContainer = document.getElementById("seatsContainer");
     seatsContainer.innerHTML = ""; // Rens containeren
 
@@ -410,7 +411,7 @@ function createSeats(seats) {
                     ticketbutton.addEventListener("click", function () {
                         const phoneNumber = prompt("Indtast dit telefonnummer:");
                         if (phoneNumber) {
-                            createTicket(seat.seatId, phoneNumber);
+                            createTicket(seat.seatId, phoneNumber, moviePlanId);
                         }
                     });
                     seatsContainer.appendChild(ticketbutton);

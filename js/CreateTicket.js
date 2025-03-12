@@ -1,12 +1,29 @@
 console.log("jeg er i createTicket!!");
 
-async function createTicket(seatId, phoneNumber){
+export async function createTicket(seatId, phoneNumber, moviePlanId){
+    console.log("CREATETICKET BLIVER KALDT")
+    console.log("seatId:", seatId);
+    console.log("moviePlanId:", moviePlanId);
+    console.log("phoneNumber:", phoneNumber);
+
+    // Konverter telefonnummer til integer
+    const phoneNumberInt = parseInt(phoneNumber, 10);
+    if (isNaN(phoneNumberInt)) {
+        console.error("Ugyldigt telefonnummer!");
+        alert("Indtast et gyldigt telefonnummer!");
+        return;
+    }
+
     const URLCreateTicket = "http://localhost:8080/ticket/createTicket";
     const ticketData = {
+        order_date: new Date().toISOString().split("T")[0], // Automatisk dags dato
         seatId: seatId,
-        phoneNumber: phoneNumber,
-        price: 100 // Tilføj en fast pris eller hent den dynamisk
+        moviePlanId: moviePlanId,
+        phoneNumber: phoneNumberInt,
+        price: 100
     };
+
+    console.log("Sender ticket data:", JSON.stringify(ticketData));
 
     try {
         const response = await fetch(URLCreateTicket, {
