@@ -1,9 +1,9 @@
-import { createTicket } from "./createTicket.js";
+import { createTicket } from "./CreateTicket.js";
 const urlMovies = "http://localhost:8080/movies";
 import { displayMovies } from './frontPage.js';
 
 console.log("Jeg er i ddChooseMovie");
-//hej
+
 const ddMovies = document.getElementById("ddMovies");
 const ddGenre = document.getElementById("ddGenre");
 const testBody = document.getElementById("body-container");
@@ -189,7 +189,7 @@ function displayMovieDetails(movie) {
 
      */
 }
-/*
+
 async function fetchMoviePlan(movieID) {
     const urlMoviePlan = `http://localhost:8080/movieplans/${movieID}`;
     try {
@@ -203,22 +203,6 @@ async function fetchMoviePlan(movieID) {
         }
     } catch (error) {
         console.error("Error fetching movie plan:", error);
-    }
-}*/
-
-async function fetchMoviePlan(movieID) {
-    const urlMoviePlan = `http://localhost:8080/movieplans/${movieID}`;
-    try {
-        const response = await fetch(urlMoviePlan);
-        if (response.ok) {
-            const moviePlans = await response.json();
-            console.log("🎬 Modtaget moviePlans fra backend:", moviePlans); // 👈 LOG DATA
-            displayMoviePlans(moviePlans);
-        } else {
-            console.error("❌ Fejl ved hentning af movie plans: " + response.statusText);
-        }
-    } catch (error) {
-        console.error("⚠️ Fejl ved fetching af movie plans:", error);
     }
 }
 
