@@ -332,6 +332,43 @@ select:focus {
     z-index: 2;
     font-size: 14px;
 }
+/* 🎟️ Stil til ticket-modal */
+.modal {
+    display: none; /* Skjult som standard */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 400px;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative; /* Sørger for at close-button placeres korrekt */
+}
+.close-button {
+    color: red;
+    font-size: 24px;
+    font-weight: bold;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: darkred;
+}
 
 #addMovieButton {
     position: fixed;
@@ -344,4 +381,5 @@ select:focus {
     border-radius: 5px;
     cursor: pointer;
 }
+
 
