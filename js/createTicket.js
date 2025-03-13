@@ -52,6 +52,7 @@ export async function createTicket(seatId, phoneNumber, moviePlanId){
         console.error("Error fetching ticket details:", error)
     }
 }
+/*
 function displayTicketDetails(ticket) {
     console.log("🎟️ Modtaget ticket JSON fra backend:", ticket);
     console.log("💺 Seat:", ticket.seat);
@@ -78,6 +79,37 @@ function displayTicketDetails(ticket) {
     );
 
     location.reload();
+}*/
+
+function displayTicketDetails(ticket) {
+    console.log("🎟️ Modtaget ticket JSON fra backend:", ticket);
+
+    // Hent modal fra HTML
+    let ticketModal = document.getElementById("ticketModal");
+
+    // Tilføj eventlistener for at lukke modal
+    let closeButton = ticketModal.querySelector(".close-button");
+    closeButton.addEventListener("click", () => {
+        ticketModal.style.display = "none";
+        location.reload(); // Opdater siden
+    });
+
+    // Udfyld modal med billetinfo
+    document.getElementById("ticketID").textContent = ticket.ticketID;
+    document.getElementById("orderDate").textContent = ticket.order_date;
+    document.getElementById("phoneNumber").textContent = ticket.phoneNumber;
+    document.getElementById("ticketPrice").textContent = ticket.ticket_price;
+    document.getElementById("movieName").textContent = ticket.moviePlan.movie.movieName;
+    document.getElementById("showNumber").textContent = ticket.moviePlan.showNumber;
+
+    let seatInfo = "Not Available";
+    if (ticket.seat) {
+        seatInfo = `Row ${ticket.seat.rowNum}, Seat ${ticket.seat.seatNumb}`;
+    }
+    document.getElementById("seatInfo").textContent = seatInfo;
+
+    // Vis modal
+    ticketModal.style.display = "block";
 }
 
 

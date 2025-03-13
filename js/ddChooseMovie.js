@@ -189,7 +189,7 @@ function displayMovieDetails(movie) {
 
      */
 }
-
+/*
 async function fetchMoviePlan(movieID) {
     const urlMoviePlan = `http://localhost:8080/movieplans/${movieID}`;
     try {
@@ -203,6 +203,22 @@ async function fetchMoviePlan(movieID) {
         }
     } catch (error) {
         console.error("Error fetching movie plan:", error);
+    }
+}*/
+
+async function fetchMoviePlan(movieID) {
+    const urlMoviePlan = `http://localhost:8080/movieplans/${movieID}`;
+    try {
+        const response = await fetch(urlMoviePlan);
+        if (response.ok) {
+            const moviePlans = await response.json();
+            console.log("🎬 Modtaget moviePlans fra backend:", moviePlans); // 👈 LOG DATA
+            displayMoviePlans(moviePlans);
+        } else {
+            console.error("❌ Fejl ved hentning af movie plans: " + response.statusText);
+        }
+    } catch (error) {
+        console.error("⚠️ Fejl ved fetching af movie plans:", error);
     }
 }
 
