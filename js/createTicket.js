@@ -1,4 +1,5 @@
 console.log("jeg er i createTicket!!");
+//fetchmovies
 //vis alle movieplans
 //display seat number(displayticket)
 //bestille flere biletter
