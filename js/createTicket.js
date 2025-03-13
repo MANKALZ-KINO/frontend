@@ -24,7 +24,7 @@ export async function createTicket(seatId, phoneNumber, moviePlanId){
         phoneNumber: phoneNumberInt,
         ticket_price: 120,
         seat: { seatId: seatId },  // Ændret fra seatId til et seat-objekt
-        moviePlan: { moviePlanId: moviePlanId } // Ændret fra moviePlanId til et moviePlan-objekt
+        moviePlan: { moviePlanId: parseInt(moviePlanId, 10) }
     };
 
 
