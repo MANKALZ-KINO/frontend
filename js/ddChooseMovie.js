@@ -1,3 +1,4 @@
+import { createTicket } from "./CreateTicket.js";
 const urlMovies = "http://localhost:8080/movies";
 console.log("Jeg er i ddChooseMovie");
 
@@ -361,7 +362,7 @@ async function fetchSeats(moviePlanId) {
         console.log("Sæder modtaget:", seats);
 
 
-        createSeats(seats);
+        createSeats(seats, moviePlanId);
     } catch (error) {
         console.error("Fejl ved hentning af sæder:", error);
     }
@@ -369,7 +370,7 @@ async function fetchSeats(moviePlanId) {
 
 
 // Funktion til at vise sæder i UI
-function createSeats(seats) {
+function createSeats(seats, moviePlanId) {
     const seatsContainer = document.getElementById("seatsContainer");
     seatsContainer.innerHTML = ""; // Rens containeren
 
@@ -400,6 +401,21 @@ function createSeats(seats) {
             seatElement.addEventListener("click", function () {
                 console.log(`Valgt sæde: Række ${seat.rowNum}, Sæde ${seat.seatNumb}`);
                 seatElement.classList.toggle("selected");
+                if (seatElement.classList.contains("selected")) {
+                    const ticketbutton = document.createElement("button");
+                    ticketbutton.classList.add("buyticketbutton");
+                    ticketbutton.textContent = "Buy Ticket!";
+                    ticketbutton.style.padding = "10px";
+                    ticketbutton.style.backgroundColor = "blue";
+                    ticketbutton.style.color = "white";
+                    ticketbutton.addEventListener("click", function () {
+                        const phoneNumber = prompt("Indtast dit telefonnummer:");
+                        if (phoneNumber) {
+                            createTicket(seat.seatId, phoneNumber, moviePlanId);
+                        }
+                    });
+                    seatsContainer.appendChild(ticketbutton);
+                }
             });
 
             rowDiv.appendChild(seatElement);
@@ -408,6 +424,8 @@ function createSeats(seats) {
         seatsContainer.appendChild(rowDiv);
     });
 }
+
+
 
 // Event listener til "Choose seats" knappen
 document.addEventListener("DOMContentLoaded", function () {
@@ -424,6 +442,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
 //note
 //før videre til en create ticket
 //indtast tlf nummer og sørg for at sende det rigtige seat med
