@@ -60,18 +60,18 @@ function displayTicketDetails(ticket) {
     let seatInfo = "📍 Seat: Not Available";
 
     if (ticket.seat) {
-        seatInfo = `📍 Seat: Row ${ticket.seat.rowNum}, Seat ${ticket.seat.seatNumb}`;
+        seatInfo = 📍 Seat: Row ${ticket.seat.rowNum}, Seat ${ticket.seat.seatNumb};
     }
 
     confirm(
-        `✅ Order Successful!\n\n` +
-        `🎟 Ticket ID: ${ticket.ticketID}\n` +
-        `📅 Order Date: ${ticket.order_date}\n` +
-        `📞 Phone Number: ${ticket.phoneNumber}\n` +
-        `💰 Price: ${ticket.ticket_price} DKK\n` +
-        `🎬 Movie: ${ticket.moviePlan.movie.movieName}\n` +
-        seatInfo + `\n` +
-        `🕒 Showtime: ${ticket.moviePlan.showNumber}`
+        ✅ Order Successful!\n\n +
+        🎟 Ticket ID: ${ticket.ticketID}\n +
+       📅 Order Date: ${ticket.order_date}\n` +
+       📞 Phone Number: ${ticket.phoneNumber}\n` +
+       💰 Price: ${ticket.ticket_price} DKK\n` +
+       🎬 Movie: ${ticket.moviePlan.movie.movieName}\n` +
+        seatInfo + \n +
+       🕒 Showtime: ${ticket.moviePlan.showNumber}`
     );
 
     location.reload();
@@ -98,9 +98,7 @@ function displayTicketDetails(ticket) {
     document.getElementById("showNumber").textContent = ticket.moviePlan.showNumber;
 
     let seatInfo = "---";
-    if (ticket.seat) {
-        seatInfo = `Row ${ticket.seat.rowNum}, Seat ${ticket.seat.seatNumb}`;
-    }
+
     document.getElementById("seatInfo").textContent = seatInfo;
 
     // Vis modal
