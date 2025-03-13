@@ -356,7 +356,6 @@ select:focus {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: relative; /* Sørger for at close-button placeres korrekt */
 }
-
 .close-button {
     color: red;
     font-size: 24px;
@@ -370,4 +369,17 @@ select:focus {
 .close-button:hover {
     color: darkred;
 }
+
+#addMovieButton {
+    position: fixed;
+    top: 100px;
+    right: 80px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 

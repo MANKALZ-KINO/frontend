@@ -1,14 +1,41 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    let formContainer = null;
 
-    function createAddMovieForm() {
-
+    function createAddMovieButton() {
         const authToken = localStorage.getItem('auth');
         if (!authToken) {
             return;
         }
 
-        const formContainer = document.createElement("div");
+        // Create "Add Movie" button
+        const addMovieButton = document.createElement("button");
+        addMovieButton.id = "addMovieButton";
+        addMovieButton.textContent = "Add Movie";
+        document.body.appendChild(addMovieButton);
+
+        const frontPageContainer = document.getElementById("frontPage");
+        const movieDetailsContainer = document.getElementById("movieDetails");
+        const moviePlanContainer = document.getElementById("moviePlan");
+
+        // Add event listener to show the form when the button is clicked
+        addMovieButton.addEventListener("click", function() {
+            createAddMovieForm();
+            frontPageContainer.innerHTML = '';  // Clear content
+            movieDetailsContainer.innerHTML = ''; // Clear content
+            moviePlanContainer.innerHTML = ''; // Clear content
+
+            addMovieButton.style.display = 'none'; // Hide the button after clicking
+        });
+    }
+
+    function createAddMovieForm() {
+        // Remove any previous form if exists
+        if (formContainer) {
+            formContainer.remove();
+        }
+
+        formContainer = document.createElement("div");
         formContainer.id = "addMovieFormContainer";
 
         const formTitle = document.createElement("h3");
@@ -86,8 +113,15 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.appendChild(formContainer);
 
         form.addEventListener("submit", addMovie);
-    }
 
+        // Add event listener to close the form when clicking outside
+        document.addEventListener("click", function (event) {
+            if (!formContainer.contains(event.target) && event.target !== addMovieButton) {
+                formContainer.remove();
+                addMovieButton.style.display = 'inline-block'; // Show the "Add Movie" button again
+            }
+        });
+    }
 
     async function addMovie(event) {
         event.preventDefault();
@@ -127,5 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("An error occurred. Please try again.");
         }
     }
-    createAddMovieForm();
+
+    // Show the "Add Movie" button if authenticated
+    createAddMovieButton();
 });
