@@ -1,5 +1,5 @@
 export const moviesUrl = "http://localhost:8080/movies";
-
+import { fetchMovieDetails } from './ddChooseMovie.js';
 async function fetchMovies() {
     try {
         const response = await fetch(moviesUrl);
