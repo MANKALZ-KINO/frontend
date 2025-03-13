@@ -342,7 +342,6 @@ select:focus {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -355,6 +354,7 @@ select:focus {
     max-width: 400px;
     margin: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative; /* Sørger for at close-button placeres korrekt */
 }
 
 .close-button {
