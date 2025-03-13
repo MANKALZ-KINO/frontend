@@ -19,17 +19,16 @@ export async function createTicket(seatId, phoneNumber, moviePlanId){
     }
 
     const URLCreateTicket = "http://localhost:8080/ticket/createTicket";
-    // Opret en liste af ticket-objekter
-    const ticketsData = seatIds.map(seatId => ({
+    const ticketData = {
         order_date: new Date().toISOString().split("T")[0], // Automatisk dags dato
         phoneNumber: phoneNumberInt,
         ticket_price: 120,
-        seat: { seatId: seatId },
-        moviePlan: { moviePlanId: moviePlanId }
-    }));
+        seat: { seatId: seatId },  // Ændret fra seatId til et seat-objekt
+        moviePlan: { moviePlanId: moviePlanId } // Ændret fra moviePlanId til et moviePlan-objekt
+    };
 
 
-    console.log("Sender ticket data:", JSON.stringify(ticketsData));
+    console.log("Sender ticket data:", JSON.stringify(ticketData));
 
     try {
         const response = await fetch(URLCreateTicket, {
@@ -37,15 +36,14 @@ export async function createTicket(seatId, phoneNumber, moviePlanId){
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(ticketsData)
+            body: JSON.stringify(ticketData)
         });
 
-    if (response.ok) {
-            const tickets = await response.json()
-        confirm("Order went through!");
-        console.log("Modtaget ticket JSON fra backend:", tickets);
-        tickets.forEach(ticket => displayTicketDetails(ticket))
-
+        if (response.ok) {
+            const ticket = await response.json()
+            confirm("Order went through, you now have a ticket!");
+            console.log("Modtaget ticket JSON fra backend:", ticket);
+            displayTicketDetails(ticket)
         } else {
             console.error("Failed to fetch ticket details: " + response.statusText)
         }
@@ -77,8 +75,7 @@ function displayTicketDetails(ticket) {
     );
 
     location.reload();
-}
-*/
+}*/
 function displayTicketDetails(ticket) {
     console.log("🎟️ Modtaget ticket JSON fra backend:", ticket);
 
