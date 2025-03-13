@@ -1,6 +1,7 @@
 const logout = () => {
     localStorage.removeItem('auth');
     determineLogin();
+    window.location.reload()
 }
 
 const determineLogin = () => {
@@ -51,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (result.status === 200) {
             localStorage.setItem('auth', username);
             determineLogin()
+            window.location.reload()
         } else {
             showErrorBanner()
         }

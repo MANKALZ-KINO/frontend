@@ -97,7 +97,7 @@ async function selectMovie(ev) {
     }
 }
 
-async function fetchMovieDetails(movieID) {
+export async function fetchMovieDetails(movieID) {
     const urlMovieDetails = `http://localhost:8080/movies/${movieID}`
     try {
         const response = await fetch(urlMovieDetails)
