@@ -1,7 +1,8 @@
 const logout = () => {
     localStorage.removeItem('auth');
     determineLogin();
-}
+    window.location.reload();
+};
 
 const determineLogin = () => {
     const loginButton = document.getElementById('loginButton');
@@ -11,6 +12,7 @@ const determineLogin = () => {
     if (authToken) {
         loginButton.style.display = 'none';
         logoutButton.style.display = 'block';
+
     } else {
         loginButton.style.display = 'block';
         logoutButton.style.display = 'none';
@@ -34,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
         loginModal.style.display = 'none';
     })
 
-    loginForm.addEventListener('submit', async () => {
+    loginForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
         const username = document.getElementById('username').value;
@@ -50,9 +52,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (result.status === 200) {
             localStorage.setItem('auth', username);
-            determineLogin()
+            determineLogin();
+            window.location.reload();
         } else {
-            showErrorBanner()
+            showErrorBanner();
         }
 
         loginModal.style.display = 'none';
