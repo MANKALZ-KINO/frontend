@@ -1,8 +1,8 @@
-// ticketManagement.js - Handles the ticket management functionality
+
 
 // Global variable to store the current customer's tickets
 let currentCustomerTickets = [];
-const API_BASE_URL = 'http://localhost:8080'; // Adjust this to your actual backend URL
+const API_BASE_URL = 'http://localhost:8080';
 
 document.addEventListener('DOMContentLoaded', function() {
     // Add ticket management button to navbar
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Set up event listeners for the ticket lookup form if it exists
+
     setupTicketLookupForm();
 
     // Set up close button for the change ticket modal if it exists
@@ -82,10 +82,10 @@ function showTicketManagementSection() {
         ticketManagementSection.style.display = 'block';
         ticketManagementSection.classList.remove('hidden');
 
-        // Make sure the form has event listeners
+
         setupTicketLookupForm();
     } else {
-        // Create the section if it doesn't exist
+
         createTicketManagementSection();
     }
 }
@@ -123,7 +123,7 @@ function createTicketManagementSection() {
             <div id="customerTicketsList" class="row"></div>
         </div>
         
-        <!-- Change Ticket Modal -->
+       
         <div id="changeTicketModal" class="modal">
             <div class="modal-content">
                 <span class="close" id="closeChangeTicketBtn">&times;</span>
@@ -264,7 +264,7 @@ function displayCustomerTickets(tickets) {
                         <strong>Show Time:</strong> ${showNumber}<br>
                         <strong>Theater:</strong> ${theaterName}<br>
                         <strong>Seat:</strong> ${seatNumber}<br>
-                       <!-- <strong>Price:</strong> $${ticket}--!>
+                        <strong>Price:</strong> $${ticket.ticket_price.toFixed(2)}
                     </p>
                 </div>
                 <div class="card-footer">
@@ -359,7 +359,7 @@ function cancelTicket(ticketId) {
 
 // Function to open change ticket modal
 function openChangeTicketModal(ticketId) {
-    // Find the ticket in the current customer tickets
+
     const ticketToChange = currentCustomerTickets.find(ticket => ticket.ticketID == ticketId);
 
     if (!ticketToChange) {
@@ -486,43 +486,5 @@ function fetchAvailableSeats(moviePlanId) {
             console.error('Error fetching available seats:', error);
             alert('Failed to load available seats: ' + error.message);
         });
-}
 
-// Function to handle change ticket form submission
-function handleChangeTicketSubmit() {
-    const ticketId = document.getElementById('ticketIdForChange').value;
-    const moviePlanId = document.getElementById('newMoviePlanSelect').value;
-    const seatId = document.getElementById('newSeatSelect').value;
-
-    if (!ticketId || !moviePlanId || !seatId) {
-        alert('Please select a movie and seat');
-        return;
-    }
-
-    // Send request to change ticket
-    const url = `${API_BASE_URL}/ticket/tickets/change?ticketId=${ticketId}&moviePlanId=${moviePlanId}&seatId=${seatId}`;
-
-    fetch(url, {
-        method: 'PUT'
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to change ticket');
-            }
-            return response.json();
-        })
-        .then(updatedTicket => {
-            // Close the modal
-            closeChangeTicketModal();
-
-            // Refresh the tickets display
-            const phoneNumber = document.getElementById('phoneNumber').value;
-            fetchCustomerTickets(phoneNumber);
-
-            alert('Ticket changed successfully');
-        })
-        .catch(error => {
-            console.error('Error changing ticket:', error);
-            alert('Failed to change ticket: ' + error.message);
-        });
 }
