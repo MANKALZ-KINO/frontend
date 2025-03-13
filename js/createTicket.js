@@ -1,5 +1,4 @@
 console.log("jeg er i createTicket!!");
-//fetchmovies
 //vis alle movieplans
 //display seat number(displayticket)
 //bestille flere biletter
@@ -54,12 +53,9 @@ export async function createTicket(seatId, phoneNumber, moviePlanId){
 }
 /*
 function displayTicketDetails(ticket) {
-    console.log("🎟️ Modtaget ticket JSON fra backend:", ticket);
-    console.log("💺 Seat:", ticket.seat);
-    console.log("💺 Seat ID:", ticket.seat?.seatId);
-    console.log("💺 Row Number:", ticket.seat?.rowNum);
-
-
+    console.log("Modtaget ticket JSON fra backend:", ticket);
+    console.log("seat:", ticket.seat);
+    console.log("seat.rowNum:", ticket.seat?.rowNum);
 
     let seatInfo = "📍 Seat: Not Available";
 
@@ -79,8 +75,8 @@ function displayTicketDetails(ticket) {
     );
 
     location.reload();
-}*/
-
+}
+*/
 function displayTicketDetails(ticket) {
     console.log("🎟️ Modtaget ticket JSON fra backend:", ticket);
 
@@ -102,7 +98,7 @@ function displayTicketDetails(ticket) {
     document.getElementById("movieName").textContent = ticket.moviePlan.movie.movieName;
     document.getElementById("showNumber").textContent = ticket.moviePlan.showNumber;
 
-    let seatInfo = "Not Available";
+    let seatInfo = "---";
     if (ticket.seat) {
         seatInfo = `Row ${ticket.seat.rowNum}, Seat ${ticket.seat.seatNumb}`;
     }
@@ -111,5 +107,3 @@ function displayTicketDetails(ticket) {
     // Vis modal
     ticketModal.style.display = "block";
 }
-
-

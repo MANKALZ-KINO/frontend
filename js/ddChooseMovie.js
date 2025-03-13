@@ -1,4 +1,4 @@
-import { createTicket } from "./CreateTicket.js";
+import { createTicket } from "./createTicket.js";
 const urlMovies = "http://localhost:8080/movies";
 import { displayMovies } from './frontPage.js';
 
