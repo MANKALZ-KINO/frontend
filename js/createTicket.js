@@ -5,7 +5,6 @@ console.log("jeg er i createTicket!!");
 //bestille flere biletter
 
 
-
 export async function createTicket(seatId, phoneNumber, moviePlanId){
     console.log("CREATETICKET BLIVER KALDT")
     console.log("seatId:", seatId);
@@ -54,9 +53,12 @@ export async function createTicket(seatId, phoneNumber, moviePlanId){
     }
 }
 function displayTicketDetails(ticket) {
-    console.log("Modtaget ticket JSON fra backend:", ticket);
-    console.log("seat:", ticket.seat);
-    console.log("seat.rowNum:", ticket.seat?.rowNum);
+    console.log("🎟️ Modtaget ticket JSON fra backend:", ticket);
+    console.log("💺 Seat:", ticket.seat);
+    console.log("💺 Seat ID:", ticket.seat?.seatId);
+    console.log("💺 Row Number:", ticket.seat?.rowNum);
+
+
 
     let seatInfo = "📍 Seat: Not Available";
 
