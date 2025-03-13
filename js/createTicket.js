@@ -20,16 +20,17 @@ export async function createTicket(seatId, phoneNumber, moviePlanId){
     }
 
     const URLCreateTicket = "http://localhost:8080/ticket/createTicket";
-    const ticketData = {
+    // Opret en liste af ticket-objekter
+    const ticketsData = seatIds.map(seatId => ({
         order_date: new Date().toISOString().split("T")[0], // Automatisk dags dato
         phoneNumber: phoneNumberInt,
         ticket_price: 120,
-        seat: { seatId: seatId },  // Ændret fra seatId til et seat-objekt
-        moviePlan: { moviePlanId: moviePlanId } // Ændret fra moviePlanId til et moviePlan-objekt
-    };
+        seat: { seatId: seatId },
+        moviePlan: { moviePlanId: moviePlanId }
+    }));
 
 
-    console.log("Sender ticket data:", JSON.stringify(ticketData));
+    console.log("Sender ticket data:", JSON.stringify(ticketsData));
 
     try {
         const response = await fetch(URLCreateTicket, {
@@ -37,14 +38,15 @@ export async function createTicket(seatId, phoneNumber, moviePlanId){
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(ticketData)
+            body: JSON.stringify(ticketsData)
         });
 
     if (response.ok) {
-            const ticket = await response.json()
-        confirm("Order went through, you now have a ticket!");
-        console.log("Modtaget ticket JSON fra backend:", ticket);
-        displayTicketDetails(ticket)
+            const tickets = await response.json()
+        confirm("Order went through!");
+        console.log("Modtaget ticket JSON fra backend:", tickets);
+        tickets.forEach(ticket => displayTicketDetails(ticket))
+
         } else {
             console.error("Failed to fetch ticket details: " + response.statusText)
         }
