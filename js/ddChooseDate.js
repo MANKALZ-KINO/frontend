@@ -1,4 +1,5 @@
 const urlDates = "http://localhost:8080/dates";
+const urlMoviePlans = "http://localhost:8080/movieplans?date=";
 console.log("Jeg er i ddChooseDate");
 
 const ddDate = document.getElementById("ddDato");
