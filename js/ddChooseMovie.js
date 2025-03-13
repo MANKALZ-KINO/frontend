@@ -1,7 +1,7 @@
 import { createTicket } from "./CreateTicket.js";
 const urlMovies = "http://localhost:8080/movies";
 console.log("Jeg er i ddChooseMovie");
-
+//hej
 const ddMovies = document.getElementById("ddMovies");
 const ddGenre = document.getElementById("ddGenre");
 const testBody = document.getElementById("body-container");
