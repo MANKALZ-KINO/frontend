@@ -11,7 +11,7 @@ async function fetchTheaters(){
             throw new Error("fejl ved hentning af teatre" + response.statusText)
         }
         const theaters = await response.json();
-        ddTheater.innerHTML = "<option value=''>Choose a theater</option>";
+        ddTheater.innerHTML = "<option value=''>See theater's</option>";
 
         theaters.forEach(theater => {
             const option = document.createElement("option");

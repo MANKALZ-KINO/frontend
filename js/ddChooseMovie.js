@@ -209,50 +209,40 @@ async function fetchMoviePlan(movieID) {
 
 function displayMoviePlans(moviePlans) {
     const moviePlanContainer = document.getElementById("moviePlan");
-
-    moviePlanContainer.innerHTML = '';
+    moviePlanContainer.innerHTML = ''; // Rens først containeren
 
     moviePlans.forEach(plan => {
         const planDiv = document.createElement("div");
         planDiv.classList.add("movie-plan");
 
         const moviePlanDate = document.createElement('h3');
-        moviePlanDate.textContent = "Show date: " + plan.moviePlanDate
-        moviePlanContainer.appendChild(moviePlanDate)
+        moviePlanDate.textContent = "Show date: " + plan.moviePlanDate;
+        planDiv.appendChild(moviePlanDate);
 
         const showTime = document.createElement('p');
-        showTime.textContent = "Show time: " + plan.showNumber
-        moviePlanContainer.appendChild(showTime);
+        showTime.textContent = "Show time: " + plan.showNumber;
+        planDiv.appendChild(showTime);
 
-        const theater = document.createElement('p')
-        theater.textContent = "Theater: " + plan.theater.theaterName
-
-        moviePlanContainer.appendChild(theater)
-
-        // Opret book seats knappen
+        const theater = document.createElement('p');
+        theater.textContent = "Theater: " + plan.theater?.theaterName;
+        planDiv.appendChild(theater);
 
         const bookSeatsButton = document.createElement("button");
         bookSeatsButton.textContent = "Choose seats";
         bookSeatsButton.classList.add("book-seats-btn");
 
-// Brug dataset til at gemme moviePlanId og theaterId
         bookSeatsButton.dataset.planId = plan.moviePlanId;
-        bookSeatsButton.dataset.theaterId = plan.theater.theaterId;
+        bookSeatsButton.dataset.theaterId = plan.theater?.theaterId;
 
-// Knyt event listener til knappen
         bookSeatsButton.addEventListener("click", function () {
-            const moviePlanId = this.dataset.planId; // Henter moviePlanId fra knappen
-            fetchSeats(moviePlanId); // Henter kun sæder til denne MoviePlan
+            fetchSeats(plan.moviePlanId);
         });
 
         planDiv.appendChild(bookSeatsButton);
-
-
-        planDiv.appendChild(bookSeatsButton); // Tilføj knappen til planen
-        moviePlanContainer.appendChild(planDiv);
-
-    })
+        moviePlanContainer.appendChild(planDiv); // Append, ikke overskriv!
+    });
 }
+
 
 // open modal by id
 function openModal(id) {
