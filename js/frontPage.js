@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-async function displayMovies(movies) {
+export async function displayMovies(movies) {
     const frontPageContainer = document.getElementById("frontPage");
 
     // Clear the front page container before adding new movies
