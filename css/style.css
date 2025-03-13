@@ -448,4 +448,135 @@ select:focus {
     outline: none;
     background-color: #eaf2ff;
 }
+/* Ticket Management Styles */
+.ticket-management-section {
+    margin-top: 120px; /* Adjust to account for the fixed header */
+    padding: 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ticket-management-section h2 {
+    margin-bottom: 20px;
+    color: #175dcc;
+}
+
+.ticket-lookup-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ticket-lookup-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.ticket-lookup-form input[type="tel"],
+.ticket-lookup-form input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.ticket-lookup-form button {
+    background-color: #175dcc;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.ticket-lookup-form button:hover {
+    background-color: dodgerblue;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Table Styling */
+.tickets-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tickets-container th,
+.tickets-container td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.tickets-container th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+}
+
+.tickets-container tr:hover {
+    background-color: #f5f5f5;
+}
+
+.change-ticket-btn, .cancel-ticket-btn {
+    margin-right: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.change-ticket-btn {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.cancel-ticket-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.close-button {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #555;
+}
 
