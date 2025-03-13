@@ -1,5 +1,7 @@
 import { createTicket } from "./CreateTicket.js";
 const urlMovies = "http://localhost:8080/movies";
+import { displayMovies } from './frontPage.js';
+
 console.log("Jeg er i ddChooseMovie");
 
 const ddMovies = document.getElementById("ddMovies");

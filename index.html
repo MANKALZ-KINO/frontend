@@ -65,6 +65,21 @@
         </form>
     </div>
 </div>
+
+<!-- 🎟️ Ticket Modal -->
+<div id="ticketModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>✅ Order Successful!</h2>
+        <p><strong>🎟 Ticket ID:</strong> <span id="ticketID"></span></p>
+        <p><strong>📅 Order Date:</strong> <span id="orderDate"></span></p>
+        <p><strong>📞 Phone Number:</strong> <span id="phoneNumber"></span></p>
+        <p><strong>💰 Price:</strong> <span id="ticketPrice"></span> DKK</p>
+        <p><strong>🎬 Movie:</strong> <span id="movieName"></span></p>
+        <p><strong>📍 Seat:</strong> <span id="seatInfo"></span></p>
+        <p><strong>🕒 Showtime:</strong> <span id="showNumber"></span></p>
+    </div>
+</div>
 <div id="loginErrorBanner" class="login-error-banner">
     Kunne ikke logge ind... Prøv venligst igen.
 </div>
@@ -73,6 +88,7 @@
 </body>
 
 <script src="js/ddChooseTheater.js"></script>
+<script type="module" src="js/ddChooseTheater.js"></script>
 <script type="module" src="js/createTicket.js"></script>
 <script type="module" src="js/ddChooseMovie.js"></script>
 <script type="module" src="js/frontPage.js"></script>
