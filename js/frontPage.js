@@ -36,6 +36,21 @@ document.addEventListener("DOMContentLoaded", function () {
             if (moviePlanContainer.innerHTML.trim() !== '') {
                 moviePlanContainer.innerHTML = ''; // Clear movie plan
             }
+            //resetter seats og buy tickets
+
+            const seatsContainer = document.getElementById("seatsContainer");
+            if (seatsContainer.innerHTML.trim() !== '') {
+                seatsContainer.innerHTML = '';
+            }
+
+            const ddMovies = document.getElementById("ddMovies");
+            const ddGenre = document.getElementById("ddGenre");
+            const ddDate = document.getElementById("ddDato");
+            const ddTheater = document.getElementById("ddTeater");
+            if (ddMovies) ddMovies.selectedIndex = 0; // Reset movie dropdown to the first option
+            if (ddGenre) ddGenre.selectedIndex = 0;   // Reset genre dropdown to the first option
+            if (ddDate) ddDate.selectedIndex = 0;
+            if (ddTheater) ddTheater.selectedIndex = 0;
 
             // Re-fetch and display all movies
             fetchMovies();
@@ -49,6 +64,8 @@ export async function displayMovies(movies) {
 
     // Clear the front page container before adding new movies
     frontPageContainer.innerHTML = '';
+
+
 
     // If there are no movies, show a message
     if (movies.length === 0) {
