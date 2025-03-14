@@ -134,13 +134,6 @@ select:focus {
     height: auto; /* Keep the aspect ratio intact */
 }
 
-#frontPage {
-
-    display: flex; /* Align movie containers in a row */
-    flex-direction: row;
-    gap: 20px; /* Add spacing between each movie */
-}
-
 
 /* NY FRONTPAGE */
 #frontPage {
@@ -167,6 +160,7 @@ select:focus {
 .image-container img:hover {
     opacity: 0.8;
 }
+
 /* Adjust for smaller screens */
 @media (max-width: 1200px) {
     .image-container {
