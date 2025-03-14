@@ -415,6 +415,19 @@ select:focus {
     cursor: pointer;
 }
 
+#deleteMovieButton {
+    position: fixed;
+    top: 180px;  /* Adjust the position as needed */
+    right: 80px;
+    padding: 10px 20px;
+    background-color: #dc3545;  /* Red color for delete button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
 /* 🎬 Stil for dropdown-container */
 .dropdown-container {
     display: flex;

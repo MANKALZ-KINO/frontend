@@ -28,6 +28,107 @@ document.addEventListener("DOMContentLoaded", function () {
             addMovieButton.style.display = 'none'; // Hide the button after clicking
         });
     }
+    function createDeleteMovieButton() {
+        const authToken = localStorage.getItem('auth');
+        if (!authToken) return;
+
+        // Create the "Delete Movie" button
+        const deleteMovieButton = document.createElement("button");
+        deleteMovieButton.id = "deleteMovieButton";  // Assign ID to the button
+        deleteMovieButton.textContent = "Delete Movie";
+        document.body.appendChild(deleteMovieButton);
+
+        const frontPageContainer = document.getElementById("frontPage");
+        const movieDetailsContainer = document.getElementById("movieDetails");
+        const moviePlanContainer = document.getElementById("moviePlan");
+
+        deleteMovieButton.addEventListener("click", function () {
+            createDeleteMovieForm();
+            frontPageContainer.innerHTML = '';  // Clear content
+            movieDetailsContainer.innerHTML = ''; // Clear content
+            moviePlanContainer.innerHTML = ''; // Clear content
+            deleteMovieButton.style.display = 'none'; // Hide the button after clicking
+        });
+    }
+
+
+    function createDeleteMovieForm() {
+        // Remove any previous form if exists
+        if (formContainer) {
+            formContainer.remove();
+        }
+
+        formContainer = document.createElement("div");
+        formContainer.id = "deleteMovieFormContainer";
+
+        const formTitle = document.createElement("h3");
+        formTitle.textContent = "Delete a Movie";
+        formContainer.appendChild(formTitle);
+
+        const form = document.createElement("form");
+        form.id = "deleteMovieForm";
+
+        // Create the input field for Movie ID
+        const movieIdLabel = document.createElement("label");
+        movieIdLabel.setAttribute("for", "movieId");
+        movieIdLabel.textContent = "Movie ID:";
+        form.appendChild(movieIdLabel);
+
+        const movieIdInput = document.createElement("input");
+        movieIdInput.type = "number";
+        movieIdInput.id = "movieId";
+        movieIdInput.name = "movieId";
+        movieIdInput.required = true;
+        form.appendChild(movieIdInput);
+        form.appendChild(document.createElement("br"));
+
+        // Create the submit button
+        const submitButton = document.createElement("button");
+        submitButton.type = "submit";
+        submitButton.textContent = "Delete Movie";
+        form.appendChild(submitButton);
+
+        formContainer.appendChild(form);
+        document.body.appendChild(formContainer);
+
+        form.addEventListener("submit", deleteMovie);
+
+        // Close the form if clicked outside
+        document.addEventListener("click", function (event) {
+            if (!formContainer.contains(event.target) && event.target !== deleteMovieButton) {
+                formContainer.remove();
+                deleteMovieButton.style.display = 'inline-block'; // Show the "Delete Movie" button again
+            }
+        });
+    }
+
+    async function deleteMovie(event) {
+        event.preventDefault();
+
+        const movieId = document.getElementById("movieId").value;
+
+        if (!movieId) {
+            alert("Please enter a movie ID");
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://localhost:8080/delete/${movieId}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                alert("Movie deleted successfully!");
+            } else {
+                const errorMessage = await response.text();
+                alert(`Failed to delete movie: ${errorMessage}`);
+            }
+        } catch (error) {
+            console.error("Error deleting movie:", error);
+            alert("An error occurred. Please try again.");
+        }
+    }
+
 
     function createAddMovieForm() {
         // Remove any previous form if exists
@@ -168,4 +269,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Show the "Add Movie" button if authenticated
     createAddMovieButton();
+    createDeleteMovieButton()
 });
+
+
+
