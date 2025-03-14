@@ -158,10 +158,13 @@ document.addEventListener("DOMContentLoaded", function () {
     async function addMoviePlan(event) {
         event.preventDefault();
 
-        const movieId = document.getElementById("movieId").value;
-        const theaterId = document.getElementById("theaterId").value;
-        const showNumber = document.getElementById("showNumber").value;
-        const moviePlanDate = document.getElementById("moviePlanDate").value;
+        const form = document.getElementById("addMoviePlanForm")
+        const formData = new FormData(form)
+
+        const movieId = formData.get("movieId")
+        const theaterId = formData.get("theaterId")
+        const showNumber = formData.get("showNumber")
+        const moviePlanDate = formData.get("moviePlanDate")
 
         if (!movieId || !theaterId || !showNumber || !moviePlanDate) {
             alert("Please fill in all fields");
@@ -186,6 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (response.ok) {
                 alert("Movie plan added successfully!");
+                form.reset()
             } else {
                 alert("Failed to add movie plan. Please try again.");
             }
