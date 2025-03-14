@@ -134,35 +134,11 @@ select:focus {
     height: auto; /* Keep the aspect ratio intact */
 }
 
-#frontPage {
-
-    display: flex; /* Align movie containers in a row */
-    flex-direction: row;
-    gap: 20px; /* Add spacing between each movie */
-}
-/*
-#frontPage. {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.image-container img {
-    width: 350px;
-    height: auto;
-}
-
-.image-container h3 {
-    margin-top: 10px;
-}
-
 
 .image-container img:hover {
     opacity: 0.8;
-}*/
+}
 
-/* NY FRONTPAGE */
 #frontPage {
     display: flex;
     flex-wrap: wrap;
