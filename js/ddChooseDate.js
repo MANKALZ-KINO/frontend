@@ -16,7 +16,6 @@ async function fetchDates() {
         }
 
         const dates = await response.json();
-        ddDate.innerHTML = "<option value=''>Choose a Date</option>";
 
         dates.forEach(date => {
             const option = document.createElement("option");

@@ -27,7 +27,6 @@ async function fetchMovies() {
                 console.log("Ingen film fundet.");
             }
 
-            ddMovies.innerHTML = "<option value=''>Vælg en film</option>";
 
             movies.forEach(movie => {
                 const option = document.createElement("option");
@@ -61,7 +60,6 @@ async function fetchMovieGenre(movies) {
 
         if (genres.size > 0) {
             // Fjern tidligere elementer fra dropdown
-            ddGenre.innerHTML = "<option value=''>Vælg en genre</option>";
 
             // Add each genre to the dropdown
             genres.forEach(genre => {
@@ -154,40 +152,6 @@ function displayMovieDetails(movie) {
         movieImage.remove()
         fetchMoviePlan(movie.movieId)
     });
-
-
-    /*
-    backLogo.addEventListener("click", () => {
-        movieDetailsContainer.innerHTML = '';
-
-        const moviePlanContainer = document.getElementById("moviePlan");
-        moviePlanContainer.innerHTML = '';
-
-        fetchMovies();
-    });
-
-     */
-
-    // Add an event listener for the back button
-    /*
-    backButton.addEventListener("click", () => {
-
-        movieDetailsContainer.innerHTML = '';
-
-        const moviePlanContainer = document.getElementById("moviePlan");
-        moviePlanContainer.innerHTML = '';
-
-        fetchMovies();
-    });
-    moviePlanButton.addEventListener("click", () => {
-
-        fetchMoviePlan(movie.movieId);
-    });
-
-
-    moviePlanButton.addEventListener("click", () => fetchMoviePlan(movie.movieId));
-
-     */
 }
 
 async function fetchMoviePlan(movieID) {
@@ -451,8 +415,3 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
-
-//note
-//før videre til en create ticket
-//indtast tlf nummer og sørg for at sende det rigtige seat med
-//sørg før at automatisk udfylde de andre attributter
