@@ -142,10 +142,10 @@ select:focus {
     gap: 20px;
     justify-content: center;
 }
-
 .image-container {
-    flex: 1 1 calc(20% - 20px); /* 5 per row on larger screens */
-    max-width: 300px; /* Limit movie card width */
+    flex: 1 1 calc(20% - 20px);
+    max-width: 300px;
+    transition: transform 0.3s ease;
 }
 
 .image-container img {
@@ -157,8 +157,9 @@ select:focus {
     text-align: center;
     margin-top: 10px;
 }
-.image-container img:hover {
-    opacity: 0.8;
+
+.image-container:hover {
+    transform: scale(1.1);
 }
 
 /* Adjust for smaller screens */
