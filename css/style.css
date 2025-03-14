@@ -150,7 +150,6 @@ select:focus {
 
 .image-container img {
     width: 100%;
-    border-radius: 10px;
 }
 
 .image-container h3 {
@@ -469,4 +468,185 @@ select:focus {
     outline: none;
     background-color: #eaf2ff;
 }
+
+#addMovieFormContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1000;
+}
+
+#addMovieFormContainer h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #333;
+}
+
+#addMovieForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#addMovieForm label {
+    font-weight: bold;
+    text-align: left;
+    display: block;
+    margin-bottom: 3px;
+}
+
+#addMovieForm input {
+    width: 95%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+#addMovieForm button {
+    margin-top: 15px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#addMovieForm button:hover {
+    background: #0056b3;
+}
+
+/* Backdrop effect when form appears */
+body::before {
+    content: "";
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+#addMovieFormContainer.active ~ body::before {
+    display: block;
+}
+
+#addMoviePlanFormContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1000;
+}
+
+#addMoviePlanFormContainer h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #333;
+}
+
+#addMoviePlanForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#addMoviePlanForm label {
+    font-weight: bold;
+    text-align: left;
+    display: block;
+    margin-bottom: 3px;
+}
+
+#addMoviePlanForm select,
+#addMoviePlanForm input {
+    width: 95%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+    background: #f9f9f9;
+}
+
+#addMoviePlanForm select {
+    cursor: pointer;
+}
+
+#addMoviePlanForm button {
+    margin-top: 15px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#addMoviePlanForm button:hover {
+    background: #0056b3;
+}
+
+/* Backdrop effect */
+body::before {
+    content: "";
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+#addMoviePlanFormContainer.active ~ body::before {
+    display: block;
+}
+
+#addMoviePlanForm select {
+    width: 95%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+    background: #f9f9f9;
+    appearance: none; /* Remove default dropdown arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    cursor: pointer;
+    padding-right: 30px; /* Space for custom arrow */
+}
+
+/* Custom dropdown arrow */
+#addMoviePlanForm select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='18' height='18' fill='%23333'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+}
+
+
 
