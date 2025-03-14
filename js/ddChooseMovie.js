@@ -339,6 +339,8 @@ ddGenre.addEventListener('change', selectGenre);
 //SEATS
 console.log("Jeg er i seeSeatsBtn!");
 
+//HVorfor opretter vi nye seats og ikke bare henter dem vi har????
+
 // Funktion til at hente sæder
 async function fetchSeats(moviePlanId) {
     const urlAllSeats = `http://localhost:8080/allFreeSeats/${moviePlanId}`;
@@ -353,11 +355,16 @@ async function fetchSeats(moviePlanId) {
         let seats = await response.json();
         console.log("Sæder modtaget:", seats);
 
-
+        clearSeats(); // Rens gamle sæder før vi tilføjer nye
         createSeats(seats, moviePlanId);
     } catch (error) {
         console.error("Fejl ved hentning af sæder:", error);
     }
+}
+ //Funktion til at rense sæder (sletter alt i seatsContainer)
+ function clearSeats() {
+     const seatsContainer = document.getElementById("seatsContainer");
+     seatsContainer.innerHTML = ''; // Fjerner alle eksisterende sæder og knapper
 }
 
 
@@ -393,6 +400,16 @@ function createSeats(seats, moviePlanId) {
             seatElement.addEventListener("click", function () {
                 console.log(`Valgt sæde: Række ${seat.rowNum}, Sæde ${seat.seatNumb}`);
                 seatElement.classList.toggle("selected");
+
+                /*  mulig løsning
+                // Fjern tidligere "Buy Ticket" knap
+                const existingButton = document.querySelector(".buyticketbutton");
+                if (existingButton) {
+                    existingButton.remove();
+                }
+                */
+
+
                 if (seatElement.classList.contains("selected")) {
                     const ticketbutton = document.createElement("button");
                     ticketbutton.classList.add("buyticketbutton");
