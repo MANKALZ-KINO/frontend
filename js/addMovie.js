@@ -126,11 +126,14 @@ document.addEventListener("DOMContentLoaded", function () {
     async function addMovie(event) {
         event.preventDefault();
 
-        const movieName = document.getElementById("movieName").value;
-        const genre = document.getElementById("movieGenre").value;
-        const ageLimit = document.getElementById("movieAgeLimit").value;
-        const duration = document.getElementById("movieDuration").value;
-        const imageUrl = document.getElementById("movieImageUrl").value;
+        const form = document.getElementById("addMovieForm")
+        const formData = new FormData(form)
+
+        const movieName = formData.get("movieName")
+        const genre = formData.get("movieGenre")
+        const ageLimit = formData.get("movieAgeLimit")
+        const duration = formData.get("movieDuration")
+        const imageUrl = formData.get("movieImageUrl")
 
         if (!movieName || !genre || !ageLimit || !duration || !imageUrl) {
             alert("Please fill in all fields");
@@ -153,6 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
             if (response.ok) {
                 alert("Movie added successfully!");
+                form.reset()
             } else {
                 alert("Failed to add movie. Please try again.");
             }
