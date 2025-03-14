@@ -85,6 +85,34 @@
     Kunne ikke logge ind... Prøv venligst igen.
 </div>
 
+<div id="ticketManagementSection" class="ticket-management-section hidden">
+    <h2>Manage Your Reservations</h2>
+
+    <form id="ticketLookupForm" class="ticket-lookup-form">
+        <div class="form-group">
+            <label for="customerPhoneInput">Enter your phone number to manage your reservations:</label>
+            <input type="tel" id="customerPhoneInput" placeholder="Phone number" required>
+            <button type="submit">Find My Reservations</button>
+        </div>
+    </form>
+
+    <div id="customerTicketsContainer" class="tickets-container">
+        <!-- Add this line -->
+        <ul id="customerTicketsList"></ul>
+    </div>
+</div>
+
+<!-- Change Ticket Modal -->
+<div id="changeTicketModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" id="closeChangeTicketBtn">&times;</span>
+        <h2>Change Reservation</h2>
+        <div id="changeTicketContent">
+        </div>
+    </div>
+</div>
+
+
 
 </body>
 
@@ -97,6 +125,8 @@
 <script src="js/ddLogin.js"></script>
 <script src="js/addMovie.js"></script>
 <script src="js/addMoviePlan.js"></script>
+<script src="js/ticketManagement.js"></script>
+
 </html>
 
 
