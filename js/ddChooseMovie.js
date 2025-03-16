@@ -36,8 +36,6 @@ async function fetchMovies() {
             });
             await fetchMovieGenre(movies);
 
-            fetchMovieGenre(movies);
-
             displayMovies(movies);
         } else {
 
@@ -347,6 +345,9 @@ function createSeats(seats, moviePlanId) {
         }
         rows[seat.rowNum].push(seat);
     });
+
+    console.log(`Total antal sæder: ${seats.length}`);
+    console.log(`Total antal rows: ${rows.length}`);
 
     // Opret rækker
     Object.keys(rows).forEach(rowNum => {
