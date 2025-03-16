@@ -334,6 +334,7 @@ async function fetchSeats(moviePlanId) {
 
 // Funktion til at vise sæder i UI
 function createSeats(seats, moviePlanId) {
+    console.log("jeg er i createseats");
     const seatsContainer = document.getElementById("seatsContainer");
     seatsContainer.innerHTML = ""; // Rens containeren
 
