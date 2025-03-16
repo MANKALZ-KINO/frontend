@@ -12,6 +12,8 @@ async function fetchTheaters(){
         }
         const theaters = await response.json();
 
+        ddTheater.innerHTML = '<option>Select a theater</option>';
+
         theaters.forEach(theater => {
             const option = document.createElement("option");
             option.textContent = theater.theaterName;

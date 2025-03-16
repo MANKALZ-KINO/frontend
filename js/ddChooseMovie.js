@@ -36,8 +36,6 @@ async function fetchMovies() {
             });
             await fetchMovieGenre(movies);
 
-            fetchMovieGenre(movies);
-
             displayMovies(movies);
         } else {
 
@@ -334,6 +332,7 @@ async function fetchSeats(moviePlanId) {
 
 // Funktion til at vise sæder i UI
 function createSeats(seats, moviePlanId) {
+    console.log("jeg er i createseats");
     const seatsContainer = document.getElementById("seatsContainer");
     seatsContainer.innerHTML = ""; // Rens containeren
 
@@ -346,6 +345,9 @@ function createSeats(seats, moviePlanId) {
         }
         rows[seat.rowNum].push(seat);
     });
+
+    console.log(`Total antal sæder: ${seats.length}`);
+    console.log(`Total antal rows: ${rows.length}`);
 
     // Opret rækker
     Object.keys(rows).forEach(rowNum => {
