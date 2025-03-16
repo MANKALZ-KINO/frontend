@@ -1,8 +1,4 @@
 console.log("jeg er i createTicket!!");
-//vis alle movieplans
-//display seat number(displayticket)
-//bestille flere biletter
-
 
 export async function createTicket(seatId, phoneNumber, moviePlanId){
     console.log("CREATETICKET BLIVER KALDT")
@@ -51,31 +47,6 @@ export async function createTicket(seatId, phoneNumber, moviePlanId){
         console.error("Error fetching ticket details:", error)
     }
 }
-/*
-function displayTicketDetails(ticket) {
-    console.log("Modtaget ticket JSON fra backend:", ticket);
-    console.log("seat:", ticket.seat);
-    console.log("seat.rowNum:", ticket.seat?.rowNum);
-
-    let seatInfo = "📍 Seat: Not Available";
-
-    if (ticket.seat) {
-        seatInfo = 📍 Seat: Row ${ticket.seat.rowNum}, Seat ${ticket.seat.seatNumb};
-    }
-
-    confirm(
-        ✅ Order Successful!\n\n +
-        🎟 Ticket ID: ${ticket.ticketID}\n +
-       📅 Order Date: ${ticket.order_date}\n` +
-       📞 Phone Number: ${ticket.phoneNumber}\n` +
-       💰 Price: ${ticket.ticket_price} DKK\n` +
-       🎬 Movie: ${ticket.moviePlan.movie.movieName}\n` +
-        seatInfo + \n +
-       🕒 Showtime: ${ticket.moviePlan.showNumber}`
-    );
-
-    location.reload();
-}*/
 function displayTicketDetails(ticket) {
     console.log("🎟️ Modtaget ticket JSON fra backend:", ticket);
 

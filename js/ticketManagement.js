@@ -1,5 +1,3 @@
-
-
 // Global variable to store the current customer's tickets
 let currentCustomerTickets = [];
 const API_BASE_URL = 'http://localhost:8080';
